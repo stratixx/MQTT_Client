@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Ubuntu makefile specific files
+MQTT_Client/UbuntuRelease/
+UbuntuRelease/
+
 # User-specific files
 *.suo
 *.user
