@@ -11,17 +11,21 @@
 int main()
 {
     std::cout << "Hello World!\n"; 
+    /*
     std::cout << "Using Boost "     
           << BOOST_VERSION / 100000     << "."  // major version
           << BOOST_VERSION / 100 % 1000 << "."  // minor version
           << BOOST_VERSION % 100                // patch level
           << std::endl;
+*/
 
     using namespace boost::lambda;
     typedef std::istream_iterator<int> in;
 
     std::for_each(
         in(std::cin), in(), std::cout << (_1 * 3) << " " );
+
+    return 0;
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania

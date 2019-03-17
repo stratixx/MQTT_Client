@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: echo Y | sudo apt-get install libboost-all-dev
+
+      - run: make clean
+
+      - run: make all
+
+      - run:
+          name: MQTT_Client_Test
+          command: echo 1 2 3 | ./UbuntuRelease/MQTT_Client
+
+      - run:
+          name: Print the Current Time
+          command: date
