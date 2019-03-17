@@ -3,10 +3,16 @@
 
 #include "pch.h"
 #include <iostream>
+#include <boost/any.hpp>
 
 int main()
 {
     std::cout << "Hello World!\n"; 
+    std::cout << "Using Boost "     
+          << BOOST_VERSION / 100000     << "."  // major version
+          << BOOST_VERSION / 100 % 1000 << "."  // minor version
+          << BOOST_VERSION % 100                // patch level
+          << std::endl;
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania

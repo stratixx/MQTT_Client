@@ -6,6 +6,7 @@
 # Ubuntu makefile specific files
 MQTT_Client/UbuntuRelease/
 UbuntuRelease/
+.vscode/
 
 # User-specific files
 *.suo
