@@ -4,6 +4,9 @@
 #include "pch.h"
 #include <iostream>
 #include <boost/any.hpp>
+#include <boost/lambda/lambda.hpp>
+#include <iterator>
+#include <algorithm>
 
 int main()
 {
@@ -13,6 +16,12 @@ int main()
           << BOOST_VERSION / 100 % 1000 << "."  // minor version
           << BOOST_VERSION % 100                // patch level
           << std::endl;
+
+    using namespace boost::lambda;
+    typedef std::istream_iterator<int> in;
+
+    std::for_each(
+        in(std::cin), in(), std::cout << (_1 * 3) << " " );
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
