@@ -25,7 +25,7 @@ int main()
     std::for_each(
         in(std::cin), in(), std::cout << (_1 * 3) << " " );
 
-    return -1;
+    return 0;
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
