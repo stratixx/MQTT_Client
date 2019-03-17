@@ -7,23 +7,30 @@
 #include <boost/lambda/lambda.hpp>
 #include <iterator>
 #include <algorithm>
+#include <boost/thread.hpp>
+#include <boost/chrono.hpp>
+
+void wait(int seconds)
+{
+	boost::this_thread::sleep_for(boost::chrono::seconds{ seconds });
+}
+
+void thread()
+{
+	for (int i = 0; i < 5; ++i)
+	{
+		wait(1);
+		std::cout << i << '\n';
+	}
+}
 
 int main()
 {
     std::cout << "Hello World!\n"; 
     
-    std::cout << "Using Boost "     
-          << BOOST_VERSION / 100000     << "."  // major version
-          << BOOST_VERSION / 100 % 1000 << "."  // minor version
-          << BOOST_VERSION % 100                // patch level
-          << std::endl;
 
-
-    using namespace boost::lambda;
-    typedef std::istream_iterator<int> in;
-
-    std::for_each(
-        in(std::cin), in(), std::cout << (_1 * 3) << " " );
+	boost::thread t{ thread };
+	t.join();
 
     return 0;
 }
