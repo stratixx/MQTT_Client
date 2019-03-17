@@ -6,7 +6,7 @@
 project_name = MQTT_Client
 
 # compilation cmd
-CC = g++
+CC = c++11
 
 # sources directory
 s = MQTT_Client
