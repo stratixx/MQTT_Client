@@ -6,7 +6,7 @@
 project_name = MQTT_Client
 
 # compilation cmd
-CC = c++11
+CC = c++ -g -Wall 
 
 # sources directory
 s = MQTT_Client
@@ -16,6 +16,9 @@ b = UbuntuRelease
 
 # *.o files directory
 o = MQTT_Client/UbuntuRelease
+
+dependencies = -lboost_chrono -lpthread  -lboost_thread 
+
 
 ###################################################################
 
@@ -31,9 +34,9 @@ clean:
 # 
 object0 = pch
 $(object0): $s/$(object0).cpp
-	$(CC) $s/$(object0).cpp  -c -o $o/$(object0).o
+	$(CC) $s/$(object0).cpp  -c -o $o/$(object0).o $(dependencies)
 
 object1 = MQTT_Client
 $(object1): pch $s/$(object1).cpp 
-	$(CC) $o/pch.o $s/$(object1).cpp     -o $b/$(object1)
+	$(CC) $o/pch.o $s/$(object1).cpp  -o $b/$(object1) $(dependencies)
 
