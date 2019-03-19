@@ -7,7 +7,10 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update
-      - run: echo Y | sudo apt-get install libboost-all-dev
+      - run: sudo apt-get install libboost-thread-dev
+      - run: sudo apt-get install libboost-chrono-dev
+      - run: sudo apt-get install libboost-system-dev
+
 
       - run: make clean
 
