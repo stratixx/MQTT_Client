@@ -6,7 +6,7 @@
 project_name = MQTT_Client
 
 # compilation cmd
-CC = c++ -g -Wall 
+CC = c++ -std=c++11 -g -Wall -static 
 
 # sources directory
 s = MQTT_Client
@@ -17,7 +17,7 @@ b = UbuntuRelease
 # *.o files directory
 o = MQTT_Client/UbuntuRelease
 
-dependencies = -lboost_chrono -lpthread  -lboost_thread 
+dependencies = -lboost_system -lboost_chrono -pthread -lpthread  -lboost_thread 
 
 
 ###################################################################
