@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: MQTT_Client_Test
-          command: echo 1 2 3 | ./UbuntuRelease/MQTT_Client
+          command: echo 1 2 3 | ./UbuntuRelease/test
 
       - run:
           name: Print the Current Time
