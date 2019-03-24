@@ -1,5 +1,4 @@
 
-
 class MQTT_Client
 {
 	public:

@@ -4,7 +4,7 @@
 //#define BOOST_TEST_MODULE MyTest
 //#include <boost/test/unit_test.hpp>
 
-#include "pch.h"
+//#include "pch.h"
 #include <iostream>
 #include <boost/any.hpp>
 #include <boost/lambda/lambda.hpp>
@@ -13,7 +13,7 @@
 #include <boost/thread.hpp>
 #include <boost/chrono.hpp>
 
-#include "MQTT_Client.hpp"
+#include "../MQTT_Package/MQTT_Client.hpp"
 
 using namespace std;
 
