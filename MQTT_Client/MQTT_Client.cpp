@@ -1,6 +1,6 @@
 ﻿// MQTT_Client.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
 //
-/*
+
 #include "pch.h"
 #include <iostream>
 #include <boost/any.hpp>
@@ -9,8 +9,9 @@
 #include <algorithm>
 #include <boost/thread.hpp>
 #include <boost/chrono.hpp>
-*/
+
 #include "MQTT_Client.hpp"
+//#include "test.cpp"
 
 MQTT_Client::MQTT_Client()
 {
@@ -37,3 +38,9 @@ int MQTT_Client::mul(int a,int b)
 {
     return a*b;
 }
+
+
+/*void main()
+{
+	std::cout << "Hello Konrad :D dziala :D ";
+}*/

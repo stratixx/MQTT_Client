@@ -9,6 +9,7 @@ class MQTT_Client
     void setState(bool);
 	int add(int,int);
 	int mul(int,int);
+	int main(); 
 
     MQTT_Client();
 };
