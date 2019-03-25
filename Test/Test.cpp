@@ -10,6 +10,7 @@
 #include <iterator>
 #include <algorithm>
 #include <boost/thread.hpp>
+#include <boost/thread/scoped_thread.hpp>
 #include <boost/chrono.hpp>
 
 #include "../MQTT_Client/MQTT_Client.h"
@@ -45,17 +46,17 @@ using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+    //std::cout << "Hello World!\n"; 
     MQTT_Client client;
 
     //cout<<"ClientState: "<<client.getState()<<endl;
-    if( client.add(5,6)==11 )
-        return 0;
-    else
-        return -1;
-
-	//boost::thread t{ thread };
-	//t.join();
+    //if( client.add(5,6)==11 )
+    //    cout<<"add ok"<<endl;
+    //else
+   // {
+   //     cout<<"add error"<<endl;
+   // }
+	boost::scoped_thread<> t{boost::thread{thread}};
 
     return 0;
 }

@@ -17,7 +17,7 @@ b = bin
 # *.o files directory
 o = obj
 
-dependencies = ../MQTT_Client/lib/MQTT_ClientLib.a
+dependencies = ../MQTT_Client/lib/MQTT_ClientLib.a -lboost_system -lboost_chrono -pthread -lpthread  -lboost_thread 
 #-lboost_unit_test_framework
 
 
