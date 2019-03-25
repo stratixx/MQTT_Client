@@ -1,3 +1,4 @@
+<<<<<<< HEAD:MQTT_Client/MQTT_Package/MQTT_Client.cpp
 ﻿// MQTT_Client.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
 //
 
@@ -43,3 +44,21 @@ int MQTT_Client::mul(int a,int b)
 {
 	std::cout << "Hello Konrad :D dziala :D ";
 }*/
+=======
+#include "MQTT_Client.h"
+
+namespace MQTT_Client_NS
+{
+
+	int MQTT_Client::add(int a, int b)
+	{
+		return a + b;
+	}
+
+	int MQTT_Client::mul(int a, int b)
+	{
+		return a * b;
+	}
+
+}
+>>>>>>> 0be6dbc4efecbed5c496d5a798af3ffc2cfc39ea:MQTT_Client/MQTT_Client.cpp
