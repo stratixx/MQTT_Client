@@ -10,13 +10,13 @@ jobs:
       - run: echo Y | sudo apt-get install libboost-thread-dev libboost-test-dev
 
 
-      - run: make clean
+      - run: ./cleanAll.sh
 
-      - run: make all
+      - run: ./makeAll.sh
 
       - run:
-          name: MQTT_Client_Test
-          command: echo 1 2 3 | ./UbuntuRelease/test
+          name: MQTT_Client_Tests
+          command: echo 1 2 3 | ./Application/bin/Application
 
       - run:
           name: Print the Current Time
