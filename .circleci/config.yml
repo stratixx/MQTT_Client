@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: MQTT_Client_Tests
-          command: echo 1 2 3 | ./Application/bin/Application
+          command: echo 1 2 3 | ./Test/bin/Test
 
       - run:
           name: Print the Current Time
