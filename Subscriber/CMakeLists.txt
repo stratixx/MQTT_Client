@@ -8,5 +8,6 @@ add_executable(${PROJECT_NAME} src/${PROJECT_NAME}.cpp)
 #target_link_libraries(${PROJECT_NAME} ${Boost_REGEX_LIBRARY})
 target_link_libraries(${PROJECT_NAME} MQTT_Client DataStore)
 set (EXECUTABLE_OUTPUT_PATH bin)
-
+#add_subdirectory(../MQTT_Client )
+#ADD_DEPENDENCIES(${PROJECT_NAME} MQTT_Client DataStore)
 

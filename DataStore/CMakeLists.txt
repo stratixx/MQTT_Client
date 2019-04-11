@@ -9,3 +9,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY lib)
 target_include_directories(${PROJECT_NAME} PRIVATE .)
 
+
+# Remove 'lib' prefix for shared libraries on Windows
+#if (WIN32)
+#  set(CMAKE_SHARED_LIBRARY_PREFIX "")
+#endif ()
