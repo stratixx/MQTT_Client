@@ -10,3 +10,8 @@ target_link_libraries(${PROJECT_NAME} MQTT_Client DataStore)
 set (EXECUTABLE_OUTPUT_PATH bin)
 
 
+
+# Remove 'lib' prefix for shared libraries on Windows
+#if (WIN32)
+#  set(CMAKE_SHARED_LIBRARY_PREFIX "")
+#endif ()

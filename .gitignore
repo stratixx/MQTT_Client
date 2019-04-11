@@ -11,3 +11,8 @@ Makefile
 cmake_install.cmake
 lib/
 bin/
+*.vcxproj*
+*.sln
+Win32/
+Debug/
+*.dir/
