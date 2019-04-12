@@ -1,16 +1,27 @@
 cmake_minimum_required(VERSION 3.10)
+
 project(DataStore VERSION 1.0.0 DESCRIPTION "Data store library")
-#set(CMAKE_CXX_STANDARD 11)
-add_library(${PROJECT_NAME} SHARED src/${PROJECT_NAME}.cpp)
+
+#find_package( Boost 1.50.0 REQUIRED )
+
+file(GLOB CPP_FILES ./src/*.cpp)
+
+add_library(${PROJECT_NAME} STATIC ${CPP_FILES})
+
 set_target_properties(${PROJECT_NAME} PROPERTIES
     VERSION ${PROJECT_VERSION}
-    SOVERSION 1
     PUBLIC_HEADER include/${PROJECT_NAME}.h 
-    LIBRARY_OUTPUT_DIRECTORY lib)
-target_include_directories(${PROJECT_NAME} PRIVATE .)
+    POSITION_INDEPENDENT_CODE ON)
 
+target_link_libraries(${PROJECT_NAME})
 
-# Remove 'lib' prefix for shared libraries on Windows
-#if (WIN32)
-#  set(CMAKE_SHARED_LIBRARY_PREFIX "")
-#endif ()
+# Expose PROJECT definitions 
+# to other subprojects through cache variable.
+set(${PROJECT_NAME}_DEFINITIONS ${XXX_DEFINITIONS}
+    CACHE INTERNAL "${PROJECT_NAME}: Definitions" FORCE)
+
+# Expose PROJECT public includes to other
+# subprojects through cache variable.
+set(${PROJECT_NAME}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
+                                 ${Boost_INCLUDE_DIRS}
+    CACHE INTERNAL "${PROJECT_NAME}: Include Directories" FORCE)

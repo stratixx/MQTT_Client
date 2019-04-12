@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.10)
 project(Subscriber VERSION 1.0.0 DESCRIPTION "Subscriber")
-#set(CMAKE_CXX_STANDARD 11)
-#find_package( Boost REQUIRED COMPONENTS program_options regex )
-INCLUDE_DIRECTORIES(../MQTT_Client/include ../DataStore/include)
-LINK_DIRECTORIES(../MQTT_Client/lib ../DataStore/lib)
-add_executable(${PROJECT_NAME} src/${PROJECT_NAME}.cpp)
-#target_link_libraries(${PROJECT_NAME} ${Boost_REGEX_LIBRARY})
-target_link_libraries(${PROJECT_NAME} MQTT_Client DataStore)
-set (EXECUTABLE_OUTPUT_PATH bin)
-#add_subdirectory(../MQTT_Client )
-#ADD_DEPENDENCIES(${PROJECT_NAME} MQTT_Client DataStore)
 
+file(GLOB CPP_FILES src/*.cpp)
+
+add_definitions(${DataStore_DEFINITIONS})
+add_definitions(${MQTT_Client_DEFINITIONS})
+
+include_directories(${DataStore_INCLUDE_DIRS})
+include_directories(${MQTT_Client_INCLUDE_DIRS})
+
+add_executable(${PROJECT_NAME} ${CPP_FILES})
+
+target_link_libraries(${PROJECT_NAME} MQTT_Client DataStore)
