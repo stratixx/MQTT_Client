@@ -16,3 +16,4 @@ bin/
 Win32/
 Debug/
 *.dir/
+Release/
