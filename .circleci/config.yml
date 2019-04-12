@@ -9,7 +9,7 @@ jobs:
       - run: sudo apt-get update
       - run: echo Y | sudo apt-get install libboost-thread-dev libboost-test-dev cmake
 
-      - run: mkdir build && cd build/ && cmake ./build && make
+      - run: mkdir build && cd build/ && cmake .. && make
 
       - run:
           name: Subscriber_Tests
