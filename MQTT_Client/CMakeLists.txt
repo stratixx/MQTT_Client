@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 2.8.10)
 
 project(MQTT_Client VERSION 1.0.0 DESCRIPTION "MQTT Client library")
 
