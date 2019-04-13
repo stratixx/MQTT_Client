@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/buildpack-deps: 18.10-curl
+      - image: circleci/buildpack-deps:18.10-curl
 
     steps:
       - checkout
