@@ -11,4 +11,13 @@ Przygotowanie:
  
  - Jeśli pracujesz w systemie Linux, wywołaj komendę `make`,
  
- - Jeśli pracujesz w systemie Windows, uruchom Visual Studio i wywołaj kompilację
+ - Jeśli pracujesz w systemie Windows, uruchom Visual Studio i wywołaj kompilację.
+
+
+Uruchomienie:
+ - w katalogu `build/MQTT_Client` znajduje się skompilowana biblioteka MQTT_Client,
+
+ - w katalogu `build/DataStore` znajduje się skompilowana biblioteka DataStore,
+
+ - w katalogu `build/Subscriber`, `build/Publisher` znajdują się pliki wykonywalne projektów `Subscriber` i `Publisher`.
+
