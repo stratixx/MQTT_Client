@@ -15,11 +15,14 @@ void wait(int seconds)
 
 void mythread()
 {
+	std::cout << '{' << '\n';
 	for (int i = 0; i < 5; ++i)
 	{
 		wait(1);
 		std::cout << i << '\n';
 	}
+	
+	std::cout << '}' << '\n';
 }
 
 namespace MQTT_Client_NS

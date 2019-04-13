@@ -3,14 +3,14 @@ set(CMAKE_CXX_STANDARD 11)
 
 project(Publisher VERSION 1.0.0 DESCRIPTION "Publisher")
 
+#boost setup
+set(Boost_USE_STATIC_LIBS TRUE)
+find_package( Boost REQUIRED COMPONENTS thread    )
 # windows options
 if (WIN32)
-	#boost setup
-	set(Boost_USE_STATIC_LIBS TRUE)
-	find_package( Boost REQUIRED COMPONENTS thread    )
 	set(BOOST_LIBRARYDIR ${Boost_INCLUDE_DIRS}/lib32-msvc-14.1)
-	include_directories(${Boost_INCLUDE_DIRS})
 endif ()
+include_directories(${Boost_INCLUDE_DIRS})
 message(STATUS "boost libs: ${Boost_LIBRARIES}")
 message(STATUS "boost inc: ${Boost_INCLUDE_DIRS}")
 
