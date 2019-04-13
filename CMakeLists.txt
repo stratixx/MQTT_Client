@@ -1,9 +1,7 @@
-cmake_minimum_required(VERSION 2.8.10)
+cmake_minimum_required(VERSION 3.1.0)
 
-# Remove 'lib' prefix for shared libraries on Windows
-if (WIN32)
-  set(CMAKE_SHARED_LIBRARY_PREFIX "")
-endif ()
+project(MQTT_Sniffer VERSION 1.0.0 DESCRIPTION "MQTT Sniffer project")
+
 
 add_subdirectory(DataStore)
 add_subdirectory(MQTT_Client) 

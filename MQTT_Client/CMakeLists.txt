@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.1.0)
+set(CMAKE_CXX_STANDARD 11)
 
 project(MQTT_Client VERSION 1.0.0 DESCRIPTION "MQTT Client library")
 
-#find_package( Boost 1.50.0 REQUIRED )
+find_package( Boost REQUIRED )
 
 file(GLOB CPP_FILES src/*.cpp)
 
@@ -13,7 +14,10 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     PUBLIC_HEADER include/${PROJECT_NAME}.h 
     POSITION_INDEPENDENT_CODE ON)
 
-target_link_libraries(${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME} )
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIRS})
+
 
 # Expose PROJECT definitions 
 # to other subprojects through cache variable.
