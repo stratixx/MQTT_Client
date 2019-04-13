@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update
-      - run: echo Y | sudo apt-get install libboost-thread-dev libboost-test-dev build-essential cmake
+      - run: echo Y | sudo apt-get install libboost-thread-dev libboost-test-dev build-essential
 
       - run: mkdir build && cd build/ && cmake .. && make
 
