@@ -2,21 +2,21 @@ version: 2
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty
+      - image: circleci/buildpack-deps:18.10-curl
 
     steps:
       - checkout
       - run: sudo apt-get update
-      - run: echo Y | sudo apt-get install libboost-thread-dev libboost-test-dev
+      - run: echo Y | sudo apt-get install libboost-thread-dev libboost-test-dev cmake build-essential
 
-      - run: sudo chmod +x cleanAll.sh makeAll.sh
-      - run: ./cleanAll.sh
-
-      - run: ./makeAll.sh
+      - run: mkdir build && cd build/ && cmake .. && make
 
       - run:
-          name: MQTT_Client_Tests
-          command: echo 1 2 3 | ./Application/bin/Application
+          name: Subscriber_Tests
+          command: echo 1 2 3 | ./build/Subscriber/Subscriber
+      - run:
+          name: Publisher_Tests
+          command: echo 1 2 3 | ./build/Publisher/Publisher
 
       - run:
           name: Print the Current Time
