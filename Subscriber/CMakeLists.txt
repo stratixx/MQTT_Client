@@ -8,7 +8,7 @@ set(Boost_USE_STATIC_LIBS TRUE)
 find_package( Boost REQUIRED COMPONENTS thread    )
 # windows options
 if (WIN32)
-	set(BOOST_LIBRARYDIR ${Boost_INCLUDE_DIRS}/lib64-msvc-14.1)
+	set(BOOST_LIBRARYDIR ${Boost_INCLUDE_DIRS}/lib32-msvc-14.1)
 endif ()
 include_directories(${Boost_INCLUDE_DIRS})
 message(STATUS "boost libs: ${Boost_LIBRARIES}")
