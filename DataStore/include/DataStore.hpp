@@ -19,7 +19,9 @@ namespace DataStore_NS
 
     public:
         int add(int, int);
-
+		// zapis oczyt danych z bazy
+		void writeData();
+		void readData(); 
 
     private:
         //PDataStore dataStorePtr_;

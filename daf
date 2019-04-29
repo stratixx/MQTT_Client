@@ -1,0 +1,346 @@
+[33mcommit c063e9940d158235374a9e9811378ff988524693[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Merge: 089ec8f a9f3a03
+Author: unknown <doli33@op.pl>
+Date:   Sun Apr 28 14:54:12 2019 +0200
+
+    Merge branch 'master' of https://github.com/stratixx/MQTT_Client
+
+[33mcommit 089ec8f4b5d18a271c8b06f671f118153461b195[m
+Author: unknown <doli33@op.pl>
+Date:   Sun Apr 28 14:54:07 2019 +0200
+
+    My local change
+
+[33mcommit a9f3a03b90982da093298e1f79db2ab2b0243b32[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: unknown <doli33@op.pl>
+Date:   Fri Apr 26 00:23:53 2019 +0200
+
+    boost 32bit
+
+[33mcommit 6fe4c9f193e66f47083efd94cb9655877d9a63d2[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Sat Apr 13 23:11:05 2019 +0200
+
+    Update CMakeLists.txt
+
+[33mcommit 45a8838595d422f6083c491cc23c2ae974388eba[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Sat Apr 13 23:10:39 2019 +0200
+
+    Update CMakeLists.txt
+
+[33mcommit 459e0cb39d7bac799a8faf3b2bf2b0f2576c8ccf[m
+Merge: 8d61b31 4e35813
+Author: unknown <doli33@op.pl>
+Date:   Sat Apr 13 22:11:47 2019 +0200
+
+    Merge
+
+[33mcommit 4e358132acbab4987198b9c72f3e001f0cd210d1[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Sat Apr 13 19:40:20 2019 +0200
+
+    working CircleCI tests
+
+[33mcommit 7e41fe554f4a874f3cac9bdb1bca1b7207e106e7[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Sat Apr 13 19:36:41 2019 +0200
+
+    Update config.yml
+
+[33mcommit 4ac1edc90c9bf3fed6d0a3dd1c2abdb5b7d9409e[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Sat Apr 13 19:35:11 2019 +0200
+
+    Update config.yml
+
+[33mcommit 677f7e07576435a976186aad6da50eedcb3afefd[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Sat Apr 13 19:31:48 2019 +0200
+
+    Update config.yml
+
+[33mcommit 62ce18dbd0336654d5af2b8820c78cf235e032a3[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Sat Apr 13 19:30:51 2019 +0200
+
+    Update config.yml
+
+[33mcommit 6da6d4fd3aced4a42da43b143305a096ddbaf134[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Sat Apr 13 19:00:03 2019 +0200
+
+    readme update
+
+[33mcommit 435bcb50b64576e6ebbef33858a93e01c8f473f9[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Sat Apr 13 18:55:52 2019 +0200
+
+    working cmakelists on windows and ubuntu
+
+[33mcommit ae5d23830340e784aa270cbd69472cd4a1eaf4a7[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Sat Apr 13 11:28:39 2019 +0200
+
+    boost working with cmake on Windows
+
+[33mcommit 8ac1dc09a1f20e95281180c0c58b12137330ee3c[m
+Merge: 0e34c15 9818f50
+Author: stratixx <darnokusex@wp.pl>
+Date:   Fri Apr 12 20:50:34 2019 +0200
+
+    Merge branch 'master' of https://github.com/stratixx/MQTT_Client
+
+[33mcommit 0e34c156ade6bfd2086c321ea1ebd3d34b407e41[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Fri Apr 12 20:50:16 2019 +0200
+
+    revert cmake version change
+
+[33mcommit 9818f506b3dd28f78b8b5a2c01ffc745c8bb766b[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Fri Apr 12 20:34:21 2019 +0200
+
+    Update README.md
+
+[33mcommit fc394d1f0fa3c6fef00da76823a8ca3c772966e9[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Fri Apr 12 20:29:14 2019 +0200
+
+    cmake version reqired 2.8.10
+
+[33mcommit 140cc14d18362e574589a8fdfbfc8f21dd8988d8[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Fri Apr 12 20:27:38 2019 +0200
+
+    cmake version reqired 2.8.10
+
+[33mcommit 3347dbd42ca2350c5a84bbcf4055771f1c5648ae[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Fri Apr 12 20:22:29 2019 +0200
+
+    circleCI
+
+[33mcommit 69739a5aad0e2f4f8e9316780208d4a5713b7bca[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Fri Apr 12 20:20:42 2019 +0200
+
+    circleCI install cmake
+
+[33mcommit 781951cc5eac7939e884328047909465198b370f[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Fri Apr 12 20:18:21 2019 +0200
+
+    cicleCI update
+
+[33mcommit 569061ebf1b821b17543a4a01488b97340c43513[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Fri Apr 12 20:06:27 2019 +0200
+
+    cmake working in visual studio. version with static libraries
+
+[33mcommit d56c6d38f23bd3554d828eeeaefb9d04b88b64a9[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Fri Apr 12 18:58:41 2019 +0200
+
+    skrypt usuwający zbędne pliki
+
+[33mcommit 9f179cafd1dbef81cb1ec15da6a2d1ef8a7dd72d[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Thu Apr 11 23:25:11 2019 +0200
+
+    gitignore update for Visual studio
+
+[33mcommit f555d50c0863ba8b1700fd327f07e5417c7387e3[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Thu Apr 11 23:01:52 2019 +0200
+
+    cmakelists updates
+
+[33mcommit f03073099d74778563bd8e40cc539090fb7bbeea[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Thu Apr 11 22:14:44 2019 +0200
+
+    CMakeFiles for modules
+
+[33mcommit edfb99ebc20fcb1d4e198060818206b943c6bd1b[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Thu Apr 11 21:41:13 2019 +0200
+
+    CMakeLists.txt update
+
+[33mcommit 6b0a8f328e991374f6885ef4518cbf0ba3b6b7de[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Thu Apr 11 21:27:33 2019 +0200
+
+    CMakeLists.txt
+
+[33mcommit caf7aacedf306c55236d9c7aff895fbbe1a317e4[m
+Merge: a3abe48 f9f4161
+Author: stratixx <darnokusex@wp.pl>
+Date:   Tue Apr 2 21:53:48 2019 +0200
+
+    Merge branch 'master' of https://github.com/stratixx/MQTT_Client
+
+[33mcommit a3abe48bea3f763ba3e16ec155f35483a9e23294[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Tue Apr 2 21:53:00 2019 +0200
+
+    nowa struktura
+
+[33mcommit f9f41612f771d1c07010ad2fb76e55a77989eb25[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Tue Mar 26 17:51:43 2019 +0100
+
+    Update config.yml
+
+[33mcommit 8d61b313eb223181bc1731c603589929771e1f3b[m
+Merge: c86f216 0be6dbc
+Author: unknown <doli33@op.pl>
+Date:   Mon Mar 25 13:33:13 2019 +0100
+
+    Merge
+
+[33mcommit 0be6dbc4efecbed5c496d5a798af3ffc2cfc39ea[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Mon Mar 25 13:22:14 2019 +0100
+
+    Update README.md
+
+[33mcommit 0f4c1beb691dad9642e9306a5edba73e85ba65d7[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Mon Mar 25 13:02:44 2019 +0100
+
+    kompilowalne na ubuntu
+
+[33mcommit 890d806b2f3c8407f96ac0763513d624f818bb79[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Mon Mar 25 12:23:30 2019 +0100
+
+    działające solution w Visual Studio
+
+[33mcommit c86f216156ca7218eb0cc710ea1d9ced4fca6354[m
+Author: unknown <doli33@op.pl>
+Date:   Sun Mar 24 21:23:28 2019 +0100
+
+    Delete a precompiled files
+
+[33mcommit 0aae1a78b258776b9f6c3401c8a98c50e283f08e[m
+Author: unknown <doli33@op.pl>
+Date:   Sun Mar 24 19:52:06 2019 +0100
+
+    Working project on Visual in Windows
+
+[33mcommit 61cdf6679408086985381fa2b4f2e38cd7f6110d[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Tue Mar 19 19:43:44 2019 +0100
+
+    circleCI install boost::test
+
+[33mcommit 6d8b70b884b2d0a2e66fe17abc03417c240fa419[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Tue Mar 19 19:40:16 2019 +0100
+
+    wstęp do testów
+
+[33mcommit 0578864dd298afa5838f3f8bf7ccb42010fcb6f9[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Tue Mar 19 12:30:50 2019 +0100
+
+    ścieżki do lib boost dla x64
+
+[33mcommit ae226b2a05a963130fbf0ced1331072c4251da40[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Tue Mar 19 11:58:55 2019 +0100
+
+    echo Y; install only boostThread
+
+[33mcommit 1899ca32726d4620ed0501051e168b947dc23dc5[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Tue Mar 19 11:56:28 2019 +0100
+
+    CircleCI install only thread chrono system
+
+[33mcommit 48f7e96ab5169598b5b7019fc23609b25a1c275b[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Tue Mar 19 01:01:20 2019 +0100
+
+    przechodzi testy CircleCI
+
+[33mcommit 7b8544a452966cd53153ee4756b5e0515aef030a[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Tue Mar 19 00:26:02 2019 +0100
+
+    kompilowalne na Ubuntu
+
+[33mcommit a380642551729d1bb4b50427ec397d564a27f2de[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Mon Mar 18 00:02:06 2019 +0100
+
+    Update README.md
+
+[33mcommit 45fe9e84db3f44104005dac04f450fc63475172a[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Sun Mar 17 23:43:23 2019 +0100
+
+    makefile change from g++ to c++11
+
+[33mcommit 3d48190dfff77dbf130790e28135be13ab8a9c63[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Sun Mar 17 23:39:13 2019 +0100
+
+    boost::Thread test
+
+[33mcommit d9a9a3c1e54171135d5f2d0fa3907a3fdfc76524[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Sun Mar 17 23:27:55 2019 +0100
+
+    dodanie ścieżki do boost w VS
+
+[33mcommit 595f72c219c5bff5de4f44390f78ee95d825e2f0[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Sun Mar 17 21:40:29 2019 +0100
+
+    revert changes
+
+[33mcommit 8d0fdbe9a7f8002b968f4e398160c3df16bcedc1[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Sun Mar 17 21:34:51 2019 +0100
+
+    try to fail CI test
+
+[33mcommit 68e4f1e95977c503e53150c8fee41959a5e3c5f8[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Sun Mar 17 20:54:54 2019 +0100
+
+    konfiguracja CircleCI
+
+[33mcommit 5c1029cca6249fbb0e0749c9e4a5e5bca87c6162[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Sun Mar 17 19:19:10 2019 +0100
+
+    boost::lambda test
+
+[33mcommit d1d793dde2fba7e726aebee7a00dee8185c246c7[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Sun Mar 17 19:13:14 2019 +0100
+
+    boost version test
+
+[33mcommit c91677b2dfca27b8edd10d50a463a14e49e3aab6[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Wed Mar 6 20:15:29 2019 +0100
+
+    Ubuntu makefile
+
+[33mcommit 3705d07de7614f3e131661999490c7416ee44200[m
+Author: stratixx <darnokusex@wp.pl>
+Date:   Wed Mar 6 19:41:01 2019 +0100
+
+    projekt VS
+
+[33mcommit eb99b883735945b6bd0ca6da5d1cd7b01e084ea7[m
+Author: Konrad Winnicki <darnokusex@wp.pl>
+Date:   Wed Mar 6 19:34:06 2019 +0100
+
+    Initial commit
