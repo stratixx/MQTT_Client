@@ -22,7 +22,8 @@ int main()
 	DataStore dataStore;
 
 
-	cout << "5+6=" << client.add(5, 6) << endl;
+	cout << "set connection type unencrypted" << client.setConnectionType("unencrypted") << endl;
+	cout << "set connection type encrypted" << client.setConnectionType("encrypted") << endl;
 	cout << "5+6=" << dataStore.add(5, 6) << endl;
 
 }

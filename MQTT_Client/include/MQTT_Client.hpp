@@ -7,6 +7,8 @@
 #define MQTT_CLIENT_H
 
 #include <boost/smart_ptr.hpp>
+#include <string>
+#include "Connection.h"
 
 namespace MQTT_Client_NS
 {
@@ -17,15 +19,17 @@ namespace MQTT_Client_NS
 
     class MQTT_Client
     {
-        typedef std::shared_ptr<MQTT_Client*>   PMQTT_Client;
-        typedef std::weak_ptr<MQTT_Client*>     PWMQTT_Client;
+        //typedef std::shared_ptr<MQTT_Client*>   PMQTT_Client;
+        //typedef std::weak_ptr<MQTT_Client*>     PWMQTT_Client;
 
     public:
-        int add(int, int);
-		int mul(int, int);
+      Connection* connection;
 
+      bool setConnectionType(std::string);
+      
+	    MQTT_Client();
     private:
-		PMQTT_Client mqtt_ClientPtr_;
+		//PMQTT_Client mqtt_ClientPtr_;
     };
 }
 

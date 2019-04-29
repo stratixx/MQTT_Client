@@ -8,6 +8,8 @@
 #include <boost/chrono.hpp>
 #include <iostream>
 
+#include "../include/ConnectionUnencrypted.h"
+
 void wait(int seconds)
 {
 	boost::this_thread::sleep_for(boost::chrono::seconds{ seconds });
@@ -28,16 +30,27 @@ void mythread()
 namespace MQTT_Client_NS
 {
 
-	int MQTT_Client::add(int a, int b)
+	bool MQTT_Client::setConnectionType(std::string type)
+	{
+		if(connection!=nullptr)
 		{
-		boost::thread t{ mythread };
-		t.join();
-		return a + b;
+			connection->disconnect();
+			delete connection;
+			connection = (Connection*)nullptr;
+		}
+
+		if( 0==type.compare("unencrypted") )
+			connection = new ConnectionUnencrypted();
+		else
+			connection = (Connection*)nullptr;
+		
+		if(connection==nullptr)
+			return false;
 	}
 
-	int MQTT_Client::mul(int a, int b)
+	MQTT_Client::MQTT_Client()
 	{
-		return a * b;
+		connection = (Connection*)nullptr;
 	}
 
 }

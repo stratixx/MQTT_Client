@@ -20,7 +20,6 @@ int main()
 	DataStore dataStore;
 
 
-	cout << "5+6=" << client.add(5, 6) << endl;
 	cout << "5+6=" << dataStore.add(5, 6) << endl;
 
 }
