@@ -20,10 +20,10 @@ public:
 	DataArchive(string dataType);
 	~DataArchive();
 private:
-	virtual void writeJSONToFile(string fileName, MQTTdata data);
-	virtual void readJSONFromFile(string fileName);
-	virtual bool writeToSQLBase(string fileName);
-	virtual bool readFromSQLBase(string fileName);
+	void writeJSONToFile(string fileName, MQTTdata data);
+	void readJSONFromFile(string fileName);
+	bool writeToSQLBase(string fileName);
+	bool readFromSQLBase(string fileName);
 };
 
 #endif

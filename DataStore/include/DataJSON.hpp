@@ -12,7 +12,7 @@
 
 using namespace std;
 
-class DataJSON:public DataArchive
+class DataJSON : public DataArchive
 {
 public:
 	DataJSON();

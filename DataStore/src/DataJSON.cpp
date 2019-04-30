@@ -8,6 +8,7 @@
 #include <fstream>
 #include "json/json.h" //this file add library for json serialization 
 
+using namespace std; 
 
 DataJSON::DataJSON() {}
 
@@ -31,10 +32,4 @@ void DataJSON::writeJSONToFile(string fileName, MQTTdata data)
 	std::ofstream output_file(fileName);
 	output_file << document;
 	output_file.close();
-}
-
-int main()
-{
-	DataJSON json = DataJSON();
-	json.readJSONFromFile("exampleJSON.json");
 }
