@@ -10,7 +10,6 @@
 #include "../include/DataArchive.hpp"
 #include "../src/json/json.h" //this file add library for json serialization 
 
-
 using namespace std;
 
 class DataJSON:public DataArchive
@@ -18,9 +17,8 @@ class DataJSON:public DataArchive
 public:
 	DataJSON();
 	~DataJSON();
-private:
-	bool write();
-	bool read();
+	void writeJSONToFile(string fileName, MQTTdata data);
+	void readJSONFromFile(string fileName);
 };
 
 #endif

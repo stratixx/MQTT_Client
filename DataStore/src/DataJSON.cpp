@@ -5,6 +5,7 @@
 */
 #include "../include/DataJSON.hpp"
 #include <iostream>
+#include <fstream>
 #include "json/json.h" //this file add library for json serialization 
 
 
@@ -12,12 +13,28 @@ DataJSON::DataJSON() {}
 
 DataJSON::~DataJSON() {}
 
-bool DataJSON::read()
+void DataJSON::readJSONFromFile(string fileName)
 {
-	return false;
+	Json::Value jsonFile;
+	std::ifstream input_file(fileName, std::ifstream::binary);
+	input_file >> jsonFile;
+
+	cout << jsonFile; //This will print the entire json object.
 }
 
-bool DataJSON::write()
+void DataJSON::writeJSONToFile(string fileName, MQTTdata data)
 {
-	return false;
+	Json::Value root;
+	Json::StreamWriterBuilder wbuilder;
+	wbuilder["indentation"] = "\t";
+	std::string document = Json::writeString(wbuilder, root);
+	std::ofstream output_file(fileName);
+	output_file << document;
+	output_file.close();
+}
+
+int main()
+{
+	DataJSON json = DataJSON();
+	json.readJSONFromFile("exampleJSON.json");
 }
