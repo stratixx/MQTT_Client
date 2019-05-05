@@ -9,11 +9,36 @@ jobs:
       - run: sudo apt-get update
       - run: echo Y | sudo apt-get install libboost-thread-dev libboost-test-dev cmake build-essential
 
-      - run: mkdir build && cd build/ && cmake .. && make
+      - run: 
+          name: Build solution
+          command: mkdir build && cd build/ && cmake .. && make
 
       - run:
           name: MQTT_ClientLib tests
           command: cd build/MQTT_Client && ctest
+
       - store_test_results:
           path: build/MQTT_Client/Testing
+
+      - run:
+          name: DataStoreLib tests
+          command: cd build/DataStore && ctest
+
+      - store_test_results:
+          path: build/DataStore/Testing
+
+      - run:
+          name: Subscriber tests
+          command: cd build/Subscriber && ctest
+
+      - store_test_results:
+          path: build/Subscriber/Testing
+
+      - run:
+          name: Publisher tests
+          command: cd build/Publisher && ctest
+
+      - store_test_results:
+          path: build/Publisher/Testing
+
 
