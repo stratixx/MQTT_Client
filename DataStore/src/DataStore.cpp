@@ -12,9 +12,14 @@ using namespace DataStore_NS;
 
 namespace DataStore_NS
 {
-    int DataStore::add(int a, int b)
+    void DataStore::writeData(string& data)
     {
-        return a + b;
+        
+    }
+
+    string DataStore::readData()
+    {
+        return "";
     }
 
 }

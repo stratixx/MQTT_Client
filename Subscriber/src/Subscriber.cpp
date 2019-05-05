@@ -17,12 +17,14 @@ using namespace std;
 
 
 DataStore dataStore;
+MQTT_Client client;
+
+
 
 int main()
 {
 	std::cout << "Hello World!: Subscriber\n";
 
-	MQTT_Client client;
 
 	client.setPort(1883);
 	client.setAddress("https://test.mosquitto.org/");
@@ -41,8 +43,13 @@ int main()
 
 bool callbackFun(MQTT_Client::MQTT_Data_t& data )
 {
+	string localData;
+
 	cout<<"callbackFun: "<<data<<endl;
-	dataStore.writeData();
+
+	localData = data;
+
+	dataStore.writeData(localData);
 
 	return false;
 }

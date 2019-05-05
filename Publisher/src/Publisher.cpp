@@ -13,17 +13,26 @@ using namespace MQTT_Client_NS;
 using namespace DataStore_NS;
 using namespace std;
 
+MQTT_Client client;
+DataStore dataStore;
 
 int main()
 {
     std::cout << "Hello World!: Publisher\n";
 
-	MQTT_Client client;
-	DataStore dataStore;
+	MQTT_Client::MQTT_Data_t data;
+	string localData;
+	string topic("testTopic_2137");
 
+	client.setPort(1883);
+	client.setAddress("https://test.mosquitto.org/");
+	client.connect();
 
-	cout << "set connection type unencrypted" << client.setConnectionType("unencrypted") << endl;
-	cout << "set connection type encrypted" << client.setConnectionType("encrypted") << endl;
-	cout << "5+6=" << dataStore.add(5, 6) << endl;
+	while( (localData=dataStore.readData()).length() > 0 )
+	{
+		data = localData;
+		client.publish(topic, data);
+	}
 
+	client.disconnect();
 }
