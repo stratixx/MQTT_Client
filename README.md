@@ -28,3 +28,8 @@ Testy:
  - Aby wywołać testy `Subscriber` lub `Publisher`, w katalogu `build/Subscriber` lub `build/Publisher` wywołaj komendę ctest
  
  - Możliwe jest wykonanie konkretnego testu poprzez uruchomienie pliku wykonywalnego z podkatalogu `testBin`
+
+Dokumentacja:
+ - Generowanie dokumentacji odbywa się poprzez wywołanie w poszczególnych katalogach komend `doxygen Doxyfile`
+ - w ten sposób generowana jest strona HTML
+ 
