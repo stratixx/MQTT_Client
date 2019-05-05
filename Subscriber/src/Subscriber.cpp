@@ -45,9 +45,9 @@ bool callbackFun(MQTT_Client::MQTT_Data_t& data )
 {
 	string localData;
 
-	cout<<"callbackFun: "<<data<<endl;
+	cout<<"callbackFun: topic: "<<data.topic<<"; data: "<<data.data<<"; "<<endl;
 
-	localData = data;
+	localData = data.data;
 
 	dataStore.writeData(localData);
 

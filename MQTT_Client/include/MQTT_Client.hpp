@@ -1,8 +1,9 @@
-﻿/*
-*
-*
+﻿/**
+* Author: Dolicher Marcin & Winnicki Konrad
+* Klasa implementująca protokół klienta MQTT
 *
 */
+
 #ifndef MQTT_CLIENT_H
 #define MQTT_CLIENT_H
 
@@ -22,7 +23,20 @@ namespace MQTT_Client_NS
     public:
       //typedef std::shared_ptr<MQTT_Client*>   PMQTT_Client;
       //typedef std::weak_ptr<MQTT_Client*>     PWMQTT_Client;
-      typedef std::string MQTT_Data_t;
+      typedef struct
+      {
+        typedef enum
+        {
+          NONE,
+          TEXT, 
+
+        }data_t;
+
+        string data;
+        data_t dataType;
+        string topic;
+      }MQTT_Data_t;
+
       typedef bool (*callback_t)(MQTT_Data_t&);
       typedef int port_t;
       typedef std::string address_t;
@@ -44,7 +58,7 @@ namespace MQTT_Client_NS
 
       bool connect();
       void disconnect();
-      
+
       bool subscribe(std::string&);
       bool subscribe(const char*);
 

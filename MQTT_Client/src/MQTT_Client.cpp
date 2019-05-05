@@ -1,8 +1,9 @@
-/*
-*
-*
+/**
+* Author: Dolicher Marcin & Winnicki Konrad
+* Klasa implementująca protokół klienta MQTT
 *
 */
+
 #include "../include/MQTT_Client.hpp"
 #include <boost/thread.hpp>
 #include <boost/chrono.hpp>
@@ -16,13 +17,22 @@ namespace MQTT_Client_NS
 
     bool MQTT_Client::spinOnce()
 	{
-		bool result;
-		MQTT_Data_t data("MQTT spin once data");
+		bool result = false;
+		MQTT_Data_t data;
+		bool dataReceived = false;
 
-		if(callback==nullptr)
-			return false;
+		dataReceived = true;
+		if(dataReceived)
+		{
+			data.data = "MQTT spin once data";
+			data.topic = "testTopic_2137";
+			data.dataType = MQTT_Client::MQTT_Data_t::data_t::TEXT;
 
-		result = (*callback)(data);
+			if(callback==nullptr)
+				return false;
+
+			result = (*callback)(data);
+		}
 
 		return result;
 	}

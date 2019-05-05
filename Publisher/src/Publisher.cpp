@@ -28,9 +28,12 @@ int main()
 	client.setAddress("https://test.mosquitto.org/");
 	client.connect();
 
+	data.topic = topic;
+	data.dataType = MQTT_Client::MQTT_Data_t::data_t::TEXT;
+
 	while( (localData=dataStore.readData()).length() > 0 )
 	{
-		data = localData;
+		data.data = localData;
 		client.publish(topic, data);
 	}
 
