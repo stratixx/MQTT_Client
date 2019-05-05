@@ -23,9 +23,9 @@ Uruchomienie:
 
 
 Testy:
- - Aby wywołać testy biblioteki `MQTT_Client` lub `DataStore`, w katalogu `build/MQTT_Client` lub `build/DataStore` wywołaj komendę ctest
+ - Aby wywołać testy biblioteki `MQTT_Client` lub `DataStore`, w katalogu `build/MQTT_Client` lub `build/DataStore` wywołaj komendę `ctest`
    
- - Aby wywołać testy `Subscriber` lub `Publisher`, w katalogu `build/Subscriber` lub `build/Publisher` wywołaj komendę ctest
+ - Aby wywołać testy `Subscriber` lub `Publisher`, w katalogu `build/Subscriber` lub `build/Publisher` wywołaj komendę `ctest`
  
  - Możliwe jest wykonanie konkretnego testu poprzez uruchomienie pliku wykonywalnego z podkatalogu `testBin`
 
