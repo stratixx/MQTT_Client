@@ -6,8 +6,6 @@ jobs:
 
     steps:
       - checkout
-      - store_test_results:
-          path: test-results
       - run: sudo apt-get update
       - run: echo Y | sudo apt-get install libboost-thread-dev libboost-test-dev cmake build-essential
 
@@ -16,4 +14,6 @@ jobs:
       - run:
           name: MQTT_ClientLib tests
           command: cd build/MQTT_Client && ctest
+      - store_test_results:
+          path: test-results
 
