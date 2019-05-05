@@ -41,16 +41,19 @@ namespace MQTT_Client_NS
 
 		if( 0==type.compare("unencrypted") )
 			connection = new ConnectionUnencrypted();
-		else
-			connection = (Connection*)nullptr;
 		
-		if(connection==nullptr)
-			return false;
+		return connection != nullptr;
 	}
 
 	MQTT_Client::MQTT_Client()
 	{
 		connection = (Connection*)nullptr;
+	}
+
+	MQTT_Client::~MQTT_Client()
+	{
+		if (connection != nullptr)
+			delete connection;
 	}
 
 }

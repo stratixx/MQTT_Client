@@ -26,8 +26,9 @@ namespace MQTT_Client_NS
       Connection* connection;
 
       bool setConnectionType(std::string);
-      
-	    MQTT_Client();
+
+	  MQTT_Client();
+	  ~MQTT_Client();
     private:
 		//PMQTT_Client mqtt_ClientPtr_;
     };

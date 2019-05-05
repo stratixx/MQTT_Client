@@ -12,12 +12,6 @@ jobs:
       - run: mkdir build && cd build/ && cmake .. && make
 
       - run:
-          name: Subscriber_Tests
-          command: echo 1 2 3 | ./build/Subscriber/Subscriber
-      - run:
-          name: Publisher_Tests
-          command: echo 1 2 3 | ./build/Publisher/Publisher
-
-      - run:
-          name: Print the Current Time
-          command: date
+          name: MQTT_ClientLib tests
+          command: cd build/MQTT_Client && ctest
+          
