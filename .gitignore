@@ -17,3 +17,6 @@ Win32/
 Debug/
 *.dir/
 Release/
+
+*/doc/html/
+*/doc/latex/
