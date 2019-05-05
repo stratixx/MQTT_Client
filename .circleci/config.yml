@@ -15,5 +15,5 @@ jobs:
           name: MQTT_ClientLib tests
           command: cd build/MQTT_Client && ctest
       - store_test_results:
-          path: test-results
+          path: build/MQTT_Client/Testing
 
