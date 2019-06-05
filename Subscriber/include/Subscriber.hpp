@@ -8,13 +8,14 @@
 
 #include <MQTT_Client.hpp>
 #include "SubscriberData.hpp"
+
 enum mosq_err_t {
 	MOSQ_ERR_SUCCESS = 0,
 	MOSQ_ERR_INVAL = 3,
 	MOSQ_ERR_NOMEM = 1,
 };
 
-struct mosquitto *mosquitto_new(const char *id, bool clean_session, void *obj);
+struct mosquitto* mosquitto_new(const char *id, bool clean_session, void *obj);
 
 bool callbackFun(MQTT_Client_NS::MQTT_Client::MQTT_Data_t& );
 int mosquitto_subscribe_simple(
@@ -47,7 +48,6 @@ int mosquitto_subscribe_callback(
 	const char *password,
 	const struct libmosquitto_will *will,
 	const struct libmosquitto_tls *tls);
-#endif
 
 int mosquitto_will_set(struct mosquitto *mosq, const char *topic, int payloadlen, const void *payload, int qos, bool retain);
 
@@ -85,3 +85,5 @@ int mosquitto_subscribe(struct mosquitto *mosq, int *mid, const char *sub, int q
 int mosquitto_disconnect(struct mosquitto *mosq);
 
 int mosquitto_message_copy(struct mosquitto_message *dst, const struct mosquitto_message *src);
+
+#endif

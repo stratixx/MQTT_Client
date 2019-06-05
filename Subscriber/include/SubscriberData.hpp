@@ -56,3 +56,6 @@ struct libmosquitto_tls {
 };
 
 
+struct mosquitto {
+
+};

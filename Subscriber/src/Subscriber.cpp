@@ -234,3 +234,80 @@ static int on_message_simple(struct mosquitto *mosq, void *obj, const struct mos
 	}
 	return 0;
 }
+
+struct mosquitto* mosquitto_new(const char *id, bool clean_session, void *obj)
+{
+	return new mosquitto();
+}
+
+int mosquitto_will_set(struct mosquitto *mosq, const char *topic, int payloadlen, const void *payload, int qos, bool retain)
+{
+	return -1;
+}
+
+void mosquitto_destroy(struct mosquitto *mosq)
+{
+
+}
+
+int mosquitto_username_pw_set(struct mosquitto *mosq, const char *username, const char *password)
+{
+	return -1;
+}
+
+
+int mosquitto_tls_set(struct mosquitto *mosq,
+	const char *cafile, const char *capath,
+	const char *certfile, const char *keyfile,
+	int(*pw_callback)(char *buf, int size, int rwflag, void *userdata))
+{
+	return -1;
+}
+
+int mosquitto_tls_opts_set(struct mosquitto *mosq, int cert_reqs, const char *tls_version, const char *ciphers)
+{
+	return -1;
+}
+
+void mosquitto_connect_callback_set(struct mosquitto *mosq, void(*on_connect)(struct mosquitto *, void *, int))
+{
+
+}
+
+void mosquitto_message_callback_set(struct mosquitto *mosq, void(*on_message)(struct mosquitto *, void *, const struct mosquitto_message *))
+{
+
+}
+
+
+
+int mosquitto_connect(struct mosquitto *mosq, const char *host, int port, int keepalive)
+{
+	return -1;
+}
+
+int mosquitto_loop_forever(struct mosquitto *mosq, int timeout, int max_packets)
+{
+	return -1;
+}
+
+
+void mosquitto_message_free_contents(struct mosquitto_message *message)
+{
+
+}
+
+int mosquitto_subscribe(struct mosquitto *mosq, int *mid, const char *sub, int qos)
+{
+	return -1;
+}
+
+int mosquitto_disconnect(struct mosquitto *mosq)
+{
+	return -1;
+}
+
+int mosquitto_message_copy(struct mosquitto_message *dst, const struct mosquitto_message *src)
+{
+	return -1;
+}
