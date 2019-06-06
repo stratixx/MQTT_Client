@@ -10,6 +10,7 @@
 #include <boost/smart_ptr.hpp>
 #include <string>
 #include "Connection.h"
+#include "SocketHandle.hpp"
 
 namespace MQTT_Client_NS
 {
@@ -56,7 +57,7 @@ namespace MQTT_Client_NS
       void setAddress(std::string&);
       void setAddress(const char*);
 
-      bool connect(std::string hostname, port_t port, int keepalive);
+      bool connect();
       void disconnect();
 
       bool subscribe(std::string&);
@@ -74,6 +75,7 @@ namespace MQTT_Client_NS
     private:
 		//PMQTT_Client mqtt_ClientPtr_;
     };
+
 
 	//#################################################
 	// mosquitto od Doliego

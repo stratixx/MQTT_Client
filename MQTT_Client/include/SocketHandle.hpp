@@ -2,7 +2,6 @@
 #define SOCKETHANDLE_H
 
 #ifdef _WIN32
-/* See http://stackoverflow.com/questions/12765743/getaddrinfo-on-win32 */
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0501  /* Windows XP. */
 #endif
@@ -18,16 +17,7 @@
 
 class SocketHandle
 {
-	typedef struct addrinfo {
-		int             ai_flags;
-		int             ai_family;
-		int             ai_socktype;
-		int             ai_protocol;
-		size_t          ai_addrlen;
-		char            *ai_canonname;
-		struct sockaddr *ai_addr;
-		struct addrinfo *ai_next;
-	} ADDRINFOA, *PADDRINFOA;
+	
 public:
 	SocketHandle();
 	~SocketHandle();
@@ -36,4 +26,16 @@ public:
 	int sockClose(SOCKET sock);
 };
 
+/*
+typedef struct addrinfo {
+	int             ai_flags;
+	int             ai_family;
+	int             ai_socktype;
+	int             ai_protocol;
+	size_t          ai_addrlen;
+	char            *ai_canonname;
+	struct sockaddr *ai_addr;
+	struct addrinfo *ai_next;
+} ADDRINFOA, *PADDRINFOA;
+*/
 #endif

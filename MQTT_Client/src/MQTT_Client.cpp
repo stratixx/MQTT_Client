@@ -5,13 +5,12 @@
 */
 
 #include "../include/MQTT_Client.hpp"
-#include "../include/SocketHandle.hpp"
 #include <boost/thread.hpp>
 #include <boost/chrono.hpp>
 #include <iostream>
+#include <winsock2.h>
 
 #include "../include/ConnectionUnencrypted.h"
-
 
 namespace MQTT_Client_NS
 {
@@ -88,27 +87,55 @@ namespace MQTT_Client_NS
 	}
 
 
-	bool MQTT_Client::connect(std::string hostname, port_t port, int keepalive)
+	bool MQTT_Client::connect()
 	{
-		// najpierw tworzymy socket i łacymy się do niego 
-		struct addrinfo *result = NULL,
-			*ptr = NULL,
-			hints;
+		WSADATA wsaData;
+
+		int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
+		if (result != NO_ERROR)
+			printf("Initialization error.\n");
+
+		SOCKET mainSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+		if (mainSocket == INVALID_SOCKET)
+		{
+			printf("Error creating socket: %ld\n", WSAGetLastError());
+			WSACleanup();
+			return 1;
+		}
+
+		sockaddr_in service;
+		memset(&service, 0, sizeof(service));
+		service.sin_family = AF_INET;
+		service.sin_addr.s_addr = inet_addr("127.0.0.1");
+		service.sin_port = htons(27015);
+
+		if (::connect(mainSocket, (SOCKADDR *)& service, sizeof(service)) == SOCKET_ERROR)
+		{
+			printf("Failed to connect.\n");
+			WSACleanup();
+			return 1;
+		}
+
+
+		// najpierw tworzymy socket i łaczmy się do niego 
+		/*struct addrinfo *result = NULL;
+		struct addrinfo *ptr = NULL;
+		struct addrinfo hints;
 		int iResult = 0;
 		int sock = 0;
 
 		// Resolve the server address and port
-		iResult = getaddrinfo(argv[1], port, &hints, &result);
+//		iResult = getaddrinfo(argv[1], port, &hints, &result);
 		if (iResult != 0) {
 			printf("getaddrinfo failed: %d\n", iResult);
 			WSACleanup();
 			return 1;
 		}
-		
+
 		SOCKET ConnectSocket = INVALID_SOCKET;
 		ptr = result;
 		ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
-		
+
 		if (ConnectSocket == INVALID_SOCKET) {
 			printf("Error at socket(): %ld\n", WSAGetLastError());
 			freeaddrinfo(result);
@@ -127,13 +154,13 @@ namespace MQTT_Client_NS
 		}
 
 		// Connect to server.
-		iResult = connect(ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen); // to kojarzy z naszym connect trzeba to zmienic
+//		iResult = connect(ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen); // to kojarzy z naszym connect trzeba to zmienic
 		if (iResult == SOCKET_ERROR) {
 			closesocket(ConnectSocket);
 			ConnectSocket = INVALID_SOCKET;
-		}
+		}*/
 
-		return false;
+		return true;
 	}
 
 	void MQTT_Client::disconnect()
@@ -187,6 +214,7 @@ namespace MQTT_Client_NS
 		if (connection != nullptr)
 			delete connection;
 	}
+
 
 	//######################################################
 	// mosquitto od Doliego 
