@@ -16,9 +16,13 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     PUBLIC_HEADER include/${PROJECT_NAME}.h 
     POSITION_INDEPENDENT_CODE ON)
 
-target_link_libraries(${PROJECT_NAME} )
+if (WIN32)
+    target_link_libraries(${PROJECT_NAME} wsock32  )
+else(WIN32)
+    target_link_libraries(${PROJECT_NAME}   ) #tu wpisz biblioteke do socketow na Linux
+endif ()
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
 
 
 # Expose PROJECT definitions 
