@@ -56,7 +56,7 @@ namespace MQTT_Client_NS
       void setAddress(std::string&);
       void setAddress(const char*);
 
-      bool connect();
+      bool connect(std::string hostname, port_t port, int keepalive);
       void disconnect();
 
       bool subscribe(std::string&);
@@ -74,7 +74,6 @@ namespace MQTT_Client_NS
     private:
 		//PMQTT_Client mqtt_ClientPtr_;
     };
-
 
 	//#################################################
 	// mosquitto od Doliego

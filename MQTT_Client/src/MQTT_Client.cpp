@@ -5,6 +5,7 @@
 */
 
 #include "../include/MQTT_Client.hpp"
+#include "../include/SocketHandle.hpp"
 #include <boost/thread.hpp>
 #include <boost/chrono.hpp>
 #include <iostream>
@@ -87,8 +88,12 @@ namespace MQTT_Client_NS
 	}
 
 
-	bool MQTT_Client::connect()
+	bool MQTT_Client::connect(std::string hostname, port_t port, int keepalive)
 	{
+		// najpierw tworzymy socket i łacymy się do niego 
+		SOCKET ConnectSocket = INVALID_SOCKET;
+		ConnectSocket = socket();
+		// piszemy za pomoca strumieni wiadomość do brokera ze chcemy sie polaczyc
 		return false;
 	}
 
@@ -143,7 +148,6 @@ namespace MQTT_Client_NS
 		if (connection != nullptr)
 			delete connection;
 	}
-
 
 	//######################################################
 	// mosquitto od Doliego 
