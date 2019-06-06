@@ -91,9 +91,48 @@ namespace MQTT_Client_NS
 	bool MQTT_Client::connect(std::string hostname, port_t port, int keepalive)
 	{
 		// najpierw tworzymy socket i łacymy się do niego 
+		struct addrinfo *result = NULL,
+			*ptr = NULL,
+			hints;
+		int iResult = 0;
+		int sock = 0;
+
+		// Resolve the server address and port
+		iResult = getaddrinfo(argv[1], port, &hints, &result);
+		if (iResult != 0) {
+			printf("getaddrinfo failed: %d\n", iResult);
+			WSACleanup();
+			return 1;
+		}
+		
 		SOCKET ConnectSocket = INVALID_SOCKET;
-		ConnectSocket = socket();
-		// piszemy za pomoca strumieni wiadomość do brokera ze chcemy sie polaczyc
+		ptr = result;
+		ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
+		
+		if (ConnectSocket == INVALID_SOCKET) {
+			printf("Error at socket(): %ld\n", WSAGetLastError());
+			freeaddrinfo(result);
+			WSACleanup();
+			return 1;
+		}
+
+		// Create a socket
+		sock = socket(AF_INET, SOCK_STREAM, 0);
+		if (sock < 0)
+		{
+			printf("\n Socket creation error \n");
+			freeaddrinfo(result);
+			WSACleanup();
+			return false;
+		}
+
+		// Connect to server.
+		iResult = connect(ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen); // to kojarzy z naszym connect trzeba to zmienic
+		if (iResult == SOCKET_ERROR) {
+			closesocket(ConnectSocket);
+			ConnectSocket = INVALID_SOCKET;
+		}
+
 		return false;
 	}
 

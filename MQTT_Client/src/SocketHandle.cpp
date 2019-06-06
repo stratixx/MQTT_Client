@@ -31,7 +31,6 @@ int sockQuit(void)
 
 int sockClose(SOCKET sock)
 {
-
 	int status = 0;
 
 #ifdef _WIN32
