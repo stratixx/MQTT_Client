@@ -35,7 +35,6 @@ int main()
 	client.unsubscribe("#");
 	client.disconnect();	
 
-	struct mosquitto* object = mosquitto_new("aa", false, (void*)"aas");
 }
 
 
