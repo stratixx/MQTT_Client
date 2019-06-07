@@ -8,7 +8,7 @@
 #include <boost/thread.hpp>
 #include <boost/chrono.hpp>
 #include <iostream>
-#include <winsock2.h>
+
 
 #include "../include/ConnectionUnencrypted.h"
 
