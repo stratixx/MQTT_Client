@@ -17,19 +17,30 @@ namespace MQTT_Client_NS
 	using namespace std;
 	using namespace boost;
 
-    class MQTT_Client;
-
+    /**
+     * Klasa obsługująca protokół MQTT
+    */
     class MQTT_Client
     {
     public:
       //typedef std::shared_ptr<MQTT_Client*>   PMQTT_Client;
       //typedef std::weak_ptr<MQTT_Client*>     PWMQTT_Client;
+
+      /**
+       * struktura przechowująca dane do publikowania
+       * oraz odebrane z subskrybcji
+       */
       typedef struct
       {
+        /**
+         * enum określający typ danych
+         */
         typedef enum
         {
           NONE,
           TEXT, 
+          BINARY, 
+          JSON
 
         }data_t;
 
@@ -48,25 +59,78 @@ namespace MQTT_Client_NS
       port_t port;
       address_t address;
 
+      /**
+       * jednokrotny przebieg pętli odświeżania 
+       */
       bool spinOnce();
+      /**
+       * wielokrotny przebieg pętli odświeżania
+       */
       bool spin();
 
+      /**
+       * wybranie typu połączenia
+       */
       bool setConnectionType(std::string);
+      
+      /**
+       * ustawienie callbacka dla danych odbieranych
+       */
       void setCallback(callback_t);
+
+      /**
+       * ustawienie portu połączenia sieciowego
+       */
       void setPort(port_t);
+
+      /**
+       * ustawienie adresu połaczenia sieciowego
+       */
       void setAddress(std::string&);
+
+      /**
+       * ustawienie adresu połaczenia sieciowego
+       */
       void setAddress(const char*);
 
+      /**
+       * próba nawiązania połaczenia sieciowego
+       */
       bool connect();
+
+      /**
+       * zakończenie połączenia sieciowego
+       */
       void disconnect();
 
+      /**
+       * zasubskrybowanie topicu
+       */
       bool subscribe(std::string&);
+
+      /**
+       * zasubskrybowanie topicu
+       */
       bool subscribe(const char*);
 
+      /**
+       * usunięcie subskrybcji topicu
+       */
       bool unsubscribe(std::string&);
+
+      /**
+       * usunięcie subskrybcji topicu
+       */
       bool unsubscribe(const char*);
 
+      /**
+       * publikacja wiadomości na topicu
+       */
       bool publish(std::string&, MQTT_Data_t&);
+
+      /**
+       * publikacja wiadomości na topicu
+       */
       bool publish(const char*, MQTT_Data_t&);
 
 
