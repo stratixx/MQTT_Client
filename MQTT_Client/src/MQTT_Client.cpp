@@ -12,6 +12,8 @@
 
 #include "../include/ConnectionUnencrypted.h"
 
+#pragma comment(lib,"WS2_32")
+
 namespace MQTT_Client_NS
 {
 

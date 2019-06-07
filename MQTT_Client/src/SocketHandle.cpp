@@ -1,4 +1,6 @@
 #include "../include/SocketHandle.hpp"
+#include <boost/smart_ptr.hpp>
+#include <string>
 
 SocketHandle::SocketHandle()
 {
