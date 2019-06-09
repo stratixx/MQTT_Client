@@ -22,7 +22,7 @@ include_directories(${MQTT_Client_INCLUDE_DIRS})
 file(GLOB CPP_FILES src/*.cpp)
 add_executable(${PROJECT_NAME} ${CPP_FILES})
 
-target_link_libraries(${PROJECT_NAME} MQTT_Client DataStore ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} MQTT_Client DataStore paho-mqtt3c-static ${Boost_LIBRARIES})
 
 #Setup CMake to run tests
 include(CTest)
