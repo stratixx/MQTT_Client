@@ -22,7 +22,7 @@ int main()
 	std::cout << "Hello World!: Subscriber\n";
 
 	client.setPort(1883);
-	client.setAddress("https://test.mosquitto.org/");
+	client.setAddress("test.mosquitto.org");
 	client.connect();
 	client.setCallback(callbackFun);
 
