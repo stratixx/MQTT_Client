@@ -24,7 +24,7 @@ int main()
 
 	DataJSON *dataJSON = new DataJSON();
 	dataJSON->readJSONFromFile("exampleJSON2.json");
-	
+
 	MQTT_Data_t data;
 	string localData;
 	string topic("testTopic_2137");

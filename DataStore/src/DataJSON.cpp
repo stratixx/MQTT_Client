@@ -10,6 +10,9 @@
 #include <iostream>
 
 #include <stdio.h>  /* defines FILENAME_MAX */
+#include <boost/foreach.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+
 
 #ifdef _WIN32
 #include <direct.h>
@@ -64,6 +67,53 @@ void DataJSON::readJSONFromFile(string fileName)
 		for (const auto& kv : b) {
 			cout << "b_b_a = " << kv.second.get<string>("b_b.b_b_a") << "\n";
 		}
+
+		
+		string jsonInString;
+		string stringTemp;
+
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, jsontree) { // iterate over immediate children of the root
+			stringTemp = v.first.data(); // use the converting path getter
+			//if(jsontree.get_child(stringTemp)!=NULL)
+			//	;
+			//boost::property_tree::ptree& childTree = jsontree.get_child();
+			
+			cout << stringTemp<<endl;
+										  //players.push_back(pid);
+		}
+
+		//std::ostringstream oss;		
+		/*boost::property_tree::ini_parser::write_ini(oss, jsontree);
+		std::string inifile_text = oss.str();
+		cout << "IIIIIIIIIIIIIIII" << inifile_text << endl;
+		*/
+
+		/*std::string xmlFile;
+		boost::property_tree::write_xml(xmlFile, jsontree);
+		cout << xmlFile;*/
+
+		//boost::property_tree::xml_writer_settings<char> settings('\t', 1);
+		boost::property_tree::write_xml("file2.xml", jsontree);// , std::locale(), settings);
+		string line;
+		ifstream in("file2.xml");
+
+		bool begin_tag = false;
+		while (getline(in, line))
+		{
+			std::string tmp; // strip whitespaces from the beginning
+			for (int i = 0; i < line.length(); i++)
+			{
+				if (line[i] == ' ' && tmp.size() == 0)
+				{
+				}
+				else
+				{
+					tmp += line[i];
+				}
+			}
+		}
+		
+		cout << "line: " << line << endl;
 		data_file.close();
 	}
 	catch (boost::property_tree::json_parser::json_parser_error) {
@@ -71,7 +121,7 @@ void DataJSON::readJSONFromFile(string fileName)
 		return;
 	}
 
-	cout << "Wczytanie pliku powiodlo sie" << endl;
+	cout << "The file was load" << endl;
 }
 
 /*void DataJSON::writeJSONToFile(string fileName, MQTTdata data)

@@ -21,10 +21,6 @@ int main()
 	MQTT_Client client;
 
 	std::cout << "Hello World!: Subscriber\n";
-
-
-
-
 	client.setAddress(MQTTBrokerAddress);
 	client.setClientID(ClientID);
 	client.connect();

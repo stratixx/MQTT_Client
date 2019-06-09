@@ -11,6 +11,8 @@
 #include "../src/json/json.h" //this file add library for json serialization 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ini_parser.hpp>
+
 
 using namespace std;
 

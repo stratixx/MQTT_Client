@@ -14,6 +14,7 @@ BOOST_AUTO_TEST_CASE( test_2 )
 	ifstream data_file = dataJSON.loadJsonFile("exampleJSON.json");
 
     BOOST_CHECK(data_file.good() ==true);
+	data_file.close();
     
 }
 
