@@ -1,0 +1,288 @@
+\documentclass[a4paper,titlepage,11pt,twosides,floatssmall]{mwrep}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage[OT1]{fontenc}
+\usepackage{polski}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{float}
+\usetikzlibrary{arrows,calc,decorations.markings,math,arrows.meta}
+\usepackage{rotating}
+\usepackage[percent]{overpic}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\usetikzlibrary{pgfplots.groupplots}
+%klikalne odnoścniki w spisie treści
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[pdfencoding=auto]{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+	linkcolor=black,  %choose some color if you want links to stand out
+	bookmarksopen=true, % 
+}
+
+%wiele kolumn tekstu na stronie
+\usepackage{multicol}
+
+\usepackage{listings}
+\usepackage{matlab-prettifier}
+\usepackage{enumitem,amssymb}
+\definecolor{szary}{rgb}{0.95,0.95,0.95}
+\usepackage{siunitx}
+\sisetup{detect-weight,exponent-product=\cdot,output-decimal-marker={,},per-mode=symbol,binary-units=true,range-phrase={-},range-units=single}
+\SendSettingsToPgf
+%konfiguracje pakietu listings
+\lstset{
+	backgroundcolor=\color{szary},
+	frame=single,
+	breaklines=true,
+}
+\lstdefinestyle{customlatex}{
+	basicstyle=\footnotesize\ttfamily,
+	%basicstyle=\small\ttfamily,
+}
+\lstdefinestyle{customc}{
+	breaklines=true,
+	frame=tb,
+	language=C,
+	xleftmargin=0pt,
+	showstringspaces=false,
+	basicstyle=\small\ttfamily,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+}
+\lstdefinestyle{custommatlab}{
+	captionpos=t,
+	breaklines=true,
+	frame=tb,
+	xleftmargin=0pt,
+	language=matlab,
+	showstringspaces=false,
+	%basicstyle=\footnotesize\ttfamily,
+	basicstyle=\scriptsize\ttfamily,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+}
+
+%wymiar tekstu (bez ?ywej paginy)
+\textwidth 160mm \textheight 247mm
+
+% ustawienia pakietu pgfplots
+\pgfplotsset{
+	compat=1.16, % tryb kompatybilności
+	tick label style={font=\scriptsize},
+	label style={font=\small},
+	legend style={font=\small},
+	title style={font=\small}
+}
+
+% ustawienia znaczników kolejnych poziomów list typu itemize
+\renewcommand\labelitemi{\textbullet} % duża kropka
+\renewcommand\labelitemii{\textasteriskcentered} % gwiazdka
+\renewcommand\labelitemiii{\textperiodcentered} % 
+\renewcommand\labelitemiv{\textendash} % 
+
+
+\def\figurename{Rys.}
+\def\tablename{Tab.}
+
+%konfiguracja liczby p?ywaj?cych element?w
+\setcounter{topnumber}{0}%2
+\setcounter{bottomnumber}{3}%1
+\setcounter{totalnumber}{5}%3
+\renewcommand{\textfraction}{0.01}%0.2
+\renewcommand{\topfraction}{0.95}%0.7
+\renewcommand{\bottomfraction}{0.95}%0.3
+\renewcommand{\floatpagefraction}{0.35}%0.5
+
+\begin{document}
+\frenchspacing
+\pagestyle{uheadings}
+
+%strona tytu?owa
+\title{\bf Sprawozdanie końcowe \vskip 0.1cm}
+\author{Marcin Dolicher \\ \indent Konrad Winnicki}
+\date{7 czerwca 2019}
+
+\makeatletter
+\renewcommand{\maketitle}{\begin{titlepage}
+\begin{center}
+{\LARGE {\bf Politechnika Warszawska}}\\
+\vspace{0.4cm}
+{\LARGE {\bf Wydział Elektroniki i Technik Informacyjnych}}\\
+\vspace{0.2cm}
+{\LARGE {\bf Instytut Automatyki i Informatyki Stosowanej}}\\
+\end{center}
+\vspace{5cm}
+\begin{center}
+{\bf \LARGE Zaawansowane programowanie w C++ \vskip 0.1cm}
+\end{center}
+\vspace{1cm}
+\begin{center}
+{\bf \LARGE \@title}
+\end{center}
+\vspace{9cm}
+%\begin{center}
+%{\bf Autor: \hspace{2cm} Promotor:  \\ \@author \hspace{2cm} Winiar}
+%{\bf Autor:\\ \Large \@author \par \hspace{2cm} Promotor: \@promotor}
+%\end{center}
+\begin{multicols}{2}
+	\bf \large Autorzy:\\ \Large \indent	\@author \par
+	\vfill\null
+	\columnbreak
+	\bf \large Prowadzący projekt:\\ \Large \indent	mgr inż. Konrad Grochowski \par
+\end{multicols}
+\vspace*{\stretch{6}}
+\begin{center}
+\bf{\large{Warszawa, \@date\vskip 0.1cm}}
+\end{center}
+\end{titlepage}
+}
+\makeatother
+
+\maketitle
+
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Dokumentacja użytkownika}
+
+Dokumentację kodu można wygenerować przy pomocy narzędzia doxygen, które na podstawie komentarzy
+w kodzie tworzy dokumentację.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Statystyki}
+%%%%%%%%%%%%%%%
+\section{Liczba linii kodu}
+
+%\subsection{}
+
+\begin{itemize}
+	\item Biblioteka MQTT Client
+\begin{itemize}
+
+\item $MQTT\_Client.cpp$ - 229 linijek 
+\item $Connection.h$ - 36 linijek 
+\item $ConnectionUnscripted.h$ - 49 linijek 
+\item $MQTT\_Client.hpp$ - 147 linijek 
+\item $SocketHandle.cpp$ - 48 linijek
+\item $Connection.cpp$ - 25 linijek 
+\item $ConnectionUnscripted.cpp$ - 105 linijek 
+\item Łącznie 639 linijek
+\end{itemize}
+
+%\subsection{Biblioteka DataStore}
+	\item Biblioteka DataStore
+\begin{itemize}
+\item $Data\_Archive.cpp$ - 25 linijek
+\item $DataJSON.cpp$ - 35 linijek 
+\item $DataStore.cpp$ - 25 linijek 
+\item $DataArchive.hpp$ - 30 linijek 
+\item $DataJSON.hpp$ - 25 linijek 
+\item $DataStore.hpp$ - 34 linijek 
+\item Łącznie 174 linijek
+\end{itemize}
+
+	\item Program Subscriber
+%\subsection{Program Subscriber}
+
+\begin{itemize}
+\item $Subscriber.cpp$ - 54 linijki
+\item $SubscriberData.cpp$ - 15 linijek
+\item $subscriber\_test\_1.cpp$ - 14 linijek 
+\item $subscriber\_test\_2.cpp$ - 14 linijek 
+\item $Subscriber.hpp$ - 15 linijek 
+\item $SubcriberData.hpp$ - 8 linijek 
+\item Łącznie 120 linijek
+\end{itemize}
+
+	\item Program Publisher
+%\subsection{Program Publisher}
+
+\begin{itemize}
+\item $Publisher.cpp$ - 41 linijek 
+\item $publiser\_test\_1.cpp$ - 14 linijek 
+\item $publiser\_test\_2.cpp$ - 14 linijek 
+\item Łącznie 69 linijek
+\end{itemize}
+
+\end{itemize}
+Łącznie 1000 linijek kodu
+
+%%%%%%%%%%%%%
+\section{Liczba testów}
+
+\begin{itemize}
+	\item Biblioteka MQTT Client
+%\subsection{Biblioteka MQTT Client}
+
+Przygotowano dwa testy jednostkowe testujące próbę połączenia. 
+\newline
+Pierwszy test sprawdza próbę połaczenia wspieranego - nieszyfrowanego.
+\newline
+Drugi test sprawdza próbę połączenia niespieranego - szyfrowanego.
+
+	\item Biblioteka DataStore
+%\subsection{Biblioteka DataStore}
+
+Przygotowano dwa testy jednostkowe pokazujące pomyślne skonfigurowanie środowiska.
+
+	\item Program Subscriber
+\subsection{Program Subscriber}
+
+Przygotowano dwa testy jednostkowe pokazujące pomyślne skonfigurowanie środowiska.
+
+\subsection{Program Publisher}
+
+Przygotowano dwa testy jednostkowe pokazujące pomyślne skonfigurowanie środowiska.
+
+
+%%%%%%%%%%%%%
+\section{Procentowe pokrycie kodu testami}
+
+\subsection{Biblioteka MQTT Client}
+
+Testy pokrywają jedną z ośmiu funkcji biblioteki, daje to \num{12.5} procent pokrycia.
+
+\subsection{Biblioteka DataStore}
+
+Testy pokrywają jedną z ośmiu funkcji biblioteki, daje to \num{12.5} procent pokrycia.
+
+\subsection{Program Subscriber}
+
+Testy pokrywają jedną z ośmiu funkcji biblioteki, daje to \num{12.5} procent pokrycia.
+
+\subsection{Program Publisher}
+
+Testy pokrywają jedną z ośmiu funkcji biblioteki, daje to \num{12.5} procent pokrycia.
+
+%%%%%%%%%%%
+\section{Liczba godzin poświęcona na projekt}
+
+Zespół powięcił na projekt łącznie około 120 godzin.
+\newline
+Większą część poświęcono na konfigurację środowiska.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\chapter{Opis napotkanych problemów i popełnionych błędów}
+
+Podczas projektu napotkaliśmy spore problemu z dołączaniem bibliotek za pomocą cmake do projektu. 
+Spowodowało to spore utrudnienia w pracy, które wygenerowały duże opóźnienia. 
+Początkowym problemem było zrozumienie i zaprojektowanie prawidłowej architektury dla sniffera MQTT. 
+Nie przewidzieliśmy problemów z samą implementacją protokołu MQTT. 
+Dotyczyły one zrozumienia dokumentacji i praktycznego zastosowania informacji w niej zawartych. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
+

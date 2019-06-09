@@ -20,3 +20,11 @@ Release/
 
 */doc/html/
 */doc/latex/
+
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
