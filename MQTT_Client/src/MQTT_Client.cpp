@@ -8,6 +8,7 @@
 #include <boost/thread.hpp>
 #include <boost/chrono.hpp>
 #include <iostream>
+#include "../../paho.mqtt.c/src/MQTTClient.h"
 
 
 #include "../include/ConnectionUnencrypted.h"
@@ -37,7 +38,11 @@ namespace MQTT_Client_NS
 
 			result = (*callback)(data);
 		}
-
+		
+		// Dodane testowo by KWinnicki
+		MQTTClient client;
+		printf("Mqtt create result: %d\n", MQTTClient_create(&client, "iot.eclipse.org", "tester", 0, &data));
+		///////////////////
 		return result;
 	}
 

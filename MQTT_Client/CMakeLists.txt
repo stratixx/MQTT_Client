@@ -17,12 +17,12 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     POSITION_INDEPENDENT_CODE ON)
 
 if (WIN32)
-    target_link_libraries(${PROJECT_NAME} wsock32  )
+    target_link_libraries(${PROJECT_NAME} wsock32 paho-mqtt3c-static )
 else(WIN32)
     target_link_libraries(${PROJECT_NAME}   ) #tu wpisz biblioteke do socketow na Linux
 endif ()
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PUBLIC ${Boost_INCLUDE_DIRS} paho.mqtt.c/src )
 
 
 # Expose PROJECT definitions 
