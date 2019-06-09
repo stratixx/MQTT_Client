@@ -20,7 +20,8 @@ MQTT_Client client;
 int main()
 {
 	std::cout << "Hello World!: Subscriber\n";
-
+	DataJSON *dataJSON = new DataJSON();
+	dataJSON->readJSONFromFile("exampleJSON2.json");
 	client.setPort(1883);
 	client.setAddress("test.mosquitto.org");
 	client.connect();
