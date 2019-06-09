@@ -21,8 +21,10 @@ int main()
 	MQTT_Client client;
 
 	std::cout << "Hello World!: Subscriber\n";
-	DataJSON *dataJSON = new DataJSON();
-	dataJSON->readJSONFromFile("exampleJSON2.json");
+
+
+
+
 	client.setAddress(MQTTBrokerAddress);
 	client.setClientID(ClientID);
 	client.connect();

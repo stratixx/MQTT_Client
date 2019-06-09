@@ -6,7 +6,9 @@
 #include <iostream>
 #include "../include/Publisher.hpp"
 #include <MQTT_Client.hpp>
+#include <MQTTData.hpp>
 #include <DataStore.hpp>
+#include <DataJSON.hpp>
 //#include <boost/smart_ptr.hpp>
 
 using namespace MQTT_Client_NS;
@@ -20,7 +22,10 @@ int main()
 {
     std::cout << "Hello World!: Publisher\n";
 
-	MQTT_Client::MQTT_Data_t data;
+	DataJSON *dataJSON = new DataJSON();
+	dataJSON->readJSONFromFile("exampleJSON2.json");
+	
+	MQTT_Data_t data;
 	string localData;
 	string topic("testTopic_2137");
 
@@ -29,7 +34,7 @@ int main()
 	client.connect();
 
 	data.topic = topic;
-	data.dataType = MQTT_Client::MQTT_Data_t::data_t::TEXT;
+	data.dataType = MQTT_Data_t::data_t::STRING;
 
 	while( (localData=dataStore.readData()).length() > 0 )
 	{
