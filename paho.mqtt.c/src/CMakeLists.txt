@@ -91,7 +91,7 @@ INSTALL(TARGETS paho-mqtt3c paho-mqtt3a
 INSTALL(TARGETS MQTTVersion
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
-IF (PAHO_BUILD_STATIC)
+#IF (PAHO_BUILD_STATIC)
     ADD_LIBRARY(paho-mqtt3c-static STATIC $<TARGET_OBJECTS:common_obj> MQTTClient.c)
     ADD_LIBRARY(paho-mqtt3a-static STATIC $<TARGET_OBJECTS:common_obj> MQTTAsync.c)
 
@@ -100,7 +100,7 @@ IF (PAHO_BUILD_STATIC)
 
     INSTALL(TARGETS paho-mqtt3c-static paho-mqtt3a-static
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-ENDIF()
+#ENDIF()
 
 INSTALL(FILES MQTTAsync.h MQTTClient.h MQTTClientPersistence.h MQTTProperties.h MQTTReasonCodes.h MQTTSubscribeOpts.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
