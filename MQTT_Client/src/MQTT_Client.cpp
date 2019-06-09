@@ -8,7 +8,6 @@
 #include <boost/thread.hpp>
 #include <boost/chrono.hpp>
 #include <iostream>
-#include "../../paho.mqtt.c/src/MQTTClient.h"
 
 
 #include "../include/ConnectionUnencrypted.h"
@@ -17,11 +16,14 @@
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "27015"
 
+
+
 namespace MQTT_Client_NS
 {
 
     bool MQTT_Client::spinOnce()
 	{
+
 		bool result = false;
 		MQTT_Data_t data;
 		bool dataReceived = false;
@@ -31,18 +33,19 @@ namespace MQTT_Client_NS
 		{
 			data.data = "MQTT spin once data";
 			data.topic = "testTopic_2137";
-			data.dataType = MQTT_Client::MQTT_Data_t::data_t::TEXT;
+			data.dataType =  MQTT_Data_t::data_t::STRING;
 
-			if(callback==nullptr)
-				return false;
+			/*if(callback==nullptr)
+				return false;*/
 
-			result = (*callback)(data);
+
+			MQTTCallback::MQTTClientContext_t context = nullptr;
+
+
+			callback->callbackMesageArrived(context, data);
+			result = true;
 		}
 		
-		// Dodane testowo by KWinnicki
-		MQTTClient client;
-		printf("Mqtt create result: %d\n", MQTTClient_create(&client, "iot.eclipse.org", "tester", 0, &data));
-		///////////////////
 		return result;
 	}
 
@@ -60,7 +63,7 @@ namespace MQTT_Client_NS
 		return false;
 	}
 
-	bool MQTT_Client::setConnectionType(std::string type)
+	bool MQTT_Client::setConnectionType(const std::string& type)
 	{
 		if(connection!=nullptr)
 		{
@@ -75,17 +78,17 @@ namespace MQTT_Client_NS
 		return connection != nullptr;
 	}
 
-	void MQTT_Client::setCallback( callback_t callback_ )
+	void MQTT_Client::setCallback(MQTTCallback* callback_ )
 	{
 		callback = callback_;
 	}
 
-	void MQTT_Client::setPort(port_t port_)
+	void MQTT_Client::setPort(const port_t& port_)
 	{
 		port = port_;
 	}
 
-	void MQTT_Client::setAddress(address_t& address_)
+	void MQTT_Client::setAddress(const address_t& address_)
 	{
 		address = address_;
 	}
@@ -95,158 +98,19 @@ namespace MQTT_Client_NS
 		address = address_t(address_);
 	}
 
+	void MQTT_Client::setClientID(const clientID_t& clientID_)
+	{
+		clientID = clientID_;
+	}
+
+	void MQTT_Client::setClientID(const char* clientID_)
+	{
+		setClientID(clientID_t(clientID_));
+	}
+
 
 	bool MQTT_Client::connect()
 	{
-	#ifdef _WIN32
-
-		WSADATA wsaData;
-		SOCKET ConnectSocket = INVALID_SOCKET;
-		struct addrinfo *result = NULL,
-			*ptr = NULL,
-			hints;
-		char *sendbuf = "MQTT"; // tu bylo MQTT
-		char recvbuf[DEFAULT_BUFLEN];
-		int iResult;
-		int recvbuflen = DEFAULT_BUFLEN;
-
-		// Validate the parameters
-		/*if (argc != 2) {
-			printf("usage: %s server-name\n", argv[0]);
-			return 1;
-		}*/
-
-		// Initialize Winsock
-		iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
-		if (iResult != 0) {
-			printf("WSAStartup failed with error: %d\n", iResult);
-			return 1;
-		}
-
-		ZeroMemory(&hints, sizeof(hints));
-		hints.ai_family = AF_UNSPEC;
-		hints.ai_socktype = SOCK_STREAM;
-		hints.ai_protocol = IPPROTO_TCP;
-
-		// Resolve the server address and port
-		// iResult = getaddrinfo("test.mosquitto.org", "1883", &hints, &result);
-		iResult = getaddrinfo("iot.eclipse.org", "80", &hints, &result);
-		if (iResult != 0) {
-			printf("getaddrinfo failed with error: %d\n", iResult);
-			WSACleanup();
-			return 1;
-		}
-
-		// Attempt to connect to an address until one succeeds
-		for (ptr = result; ptr != NULL; ptr = ptr->ai_next) {
-
-			// Create a SOCKET for connecting to server
-			ConnectSocket = ::socket(ptr->ai_family, ptr->ai_socktype,
-				ptr->ai_protocol);
-			if (ConnectSocket == INVALID_SOCKET) {
-				printf("socket failed with error: %ld\n", WSAGetLastError());
-				WSACleanup();
-				return 1;
-			}
-
-			// Connect to server.
-			iResult = ::connect(ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);
-			if (iResult == SOCKET_ERROR) {
-				closesocket(ConnectSocket);
-				ConnectSocket = INVALID_SOCKET;
-				continue;
-			}
-			break;
-		}
-
-		freeaddrinfo(result);
-
-		if (ConnectSocket == INVALID_SOCKET) {
-			printf("Unable to connect to server!\n");
-			WSACleanup();
-			return 1;
-		}
-
-		char id [5];
-		id[0] = 'm';
-		id[1] = 'q';
-		id[2] = 't';
-		id[3] = 't';
-		id[4] = '/';
-		// Send an initial buffer
-		// (int)strlen(sendbuf)
-		iResult = send(ConnectSocket, sendbuf, (int)strlen(sendbuf), 0);
-		if (iResult == SOCKET_ERROR) {
-			printf("send failed with error: %d\n", WSAGetLastError());
-			closesocket(ConnectSocket);
-			WSACleanup();
-			return 1;
-		}
-
-		printf("Bytes Sent: %ld\n", iResult);
-
-		// shutdown the connection since no more data will be sent
-		iResult = shutdown(ConnectSocket, SD_SEND);
-		if (iResult == SOCKET_ERROR) {
-			printf("shutdown failed with error: %d\n", WSAGetLastError());
-			closesocket(ConnectSocket);
-			WSACleanup();
-			return 1;
-		}
-
-		// Receive until the peer closes the connection
-		do {
-
-			iResult = recv(ConnectSocket, recvbuf, recvbuflen, 0);
-			if (iResult > 0)
-				printf("Bytes received: %d\n", iResult);
-			else if (iResult == 0)
-				printf("Connection closed\n");
-			else
-				printf("recv failed with error: %d\n", WSAGetLastError());
-
-		} while (iResult > 0);
-
-		// cleanup
-		closesocket(ConnectSocket);
-		WSACleanup();
-
-		/*
-		TO CO ZROBILEM, ZOSTAWIAM TUTAJ
-		WSADATA wsaData;
-
-		int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
-		if (result != NO_ERROR)
-		{
-			printf("Initialization error.\n");
-			return false;
-		}
-
-		SOCKET mainSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-		if (mainSocket == INVALID_SOCKET)
-		{
-			printf("Error creating socket: %ld\n", WSAGetLastError());
-			WSACleanup();
-			return false;
-		}
-
-		sockaddr_in service;
-		memset(&service, 0, sizeof(service));
-		service.sin_family = AF_INET;
-		service.sin_addr.s_addr = inet_addr("test.mosquitto.org");
-		service.sin_port = htons(8080);
-
-		if (::connect(mainSocket, (SOCKADDR *)& service, sizeof(service)) == SOCKET_ERROR)
-		{
-			printf("Failed to connect.\n");
-			WSACleanup();
-			return false;
-		}
-		*/
-	#else //_WIN32
-
-	#endif // _WIN32
-
 
 		return true;
 	}
@@ -255,9 +119,41 @@ namespace MQTT_Client_NS
 	{
 
 	}
+
 	
-	bool MQTT_Client::subscribe(std::string& topic)
+	bool MQTT_Client::subscribe(const std::string& topic)
 	{
+/*
+		MQTTClient client;
+		MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
+		int rc;
+		int ch;
+
+		MQTTClient_create(&client, ADDRESS, CLIENTID,
+			MQTTCLIENT_PERSISTENCE_NONE, NULL);
+		conn_opts.keepAliveInterval = 20;
+		conn_opts.cleansession = 1;
+
+		MQTTClient_setCallbacks(client, NULL, connlost, msgarrvd, delivered);
+
+		if ((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
+		{
+			printf("Failed to connect, return code %d\n", rc);
+			exit(EXIT_FAILURE);
+		}
+		printf("Subscribing to topic %s\nfor client %s using QoS%d\n\n"
+			"Press Q<Enter> to quit\n\n", TOPIC, CLIENTID, QOS);
+		MQTTClient_subscribe(client, TOPIC, QOS);
+
+		do
+		{
+			ch = getchar();
+		} while (ch != 'Q' && ch != 'q');
+
+		MQTTClient_unsubscribe(client, TOPIC);
+		MQTTClient_disconnect(client, 10000);
+		MQTTClient_destroy(&client);
+		return rc==0;*/
 		return false;
 	}
 
@@ -267,7 +163,7 @@ namespace MQTT_Client_NS
 		return subscribe(topic);
 	}
 
-	bool MQTT_Client::unsubscribe(std::string& topic_)
+	bool MQTT_Client::unsubscribe(const std::string& topic_)
 	{
 		return false;
 	}
@@ -278,12 +174,13 @@ namespace MQTT_Client_NS
 		return unsubscribe(topic);
 	}
 
-	bool MQTT_Client::publish(std::string& topic_, MQTT_Data_t& data)
+	bool MQTT_Client::publish(const std::string& topic_, const MQTT_Data_t& data)
 	{
+
 		return false;
 	}
 
-	bool MQTT_Client::publish(const char* topic_, MQTT_Data_t& data)
+	bool MQTT_Client::publish(const char* topic_, const MQTT_Data_t& data)
 	{
 		std::string topic(topic_);
 		return publish(topic, data);

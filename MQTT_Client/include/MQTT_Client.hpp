@@ -4,13 +4,17 @@
 *
 */
 
-#ifndef MQTT_CLIENT_H
+#ifndef MQTT_CLIENT_H 
 #define MQTT_CLIENT_H
 
 #include <boost/smart_ptr.hpp>
 #include <string>
 #include "Connection.h"
 #include "SocketHandle.hpp"
+#include "../../paho.mqtt.c/src/MQTTClient.h"
+#include "../include/MQTTCallback.hpp"
+#include "MQTTData.hpp"
+
 
 namespace MQTT_Client_NS
 {
@@ -25,39 +29,18 @@ namespace MQTT_Client_NS
     public:
       //typedef std::shared_ptr<MQTT_Client*>   PMQTT_Client;
       //typedef std::weak_ptr<MQTT_Client*>     PWMQTT_Client;
+			   		 
 
-      /**
-       * struktura przechowująca dane do publikowania
-       * oraz odebrane z subskrybcji
-       */
-      typedef struct
-      {
-        /**
-         * enum określający typ danych
-         */
-        typedef enum
-        {
-          NONE,
-          TEXT, 
-          BINARY, 
-          JSON
-
-        }data_t;
-
-        string data;
-        data_t dataType;
-        string topic;
-      }MQTT_Data_t;
-
-      typedef bool (*callback_t)(MQTT_Data_t&);
       typedef int port_t;
       typedef std::string address_t;
-      typedef std::string topicName_t;
+	  typedef std::string topicName_t;
+	  typedef std::string clientID_t;
 
       Connection* connection;
-      callback_t callback;
       port_t port;
       address_t address;
+	  clientID_t clientID;
+	  MQTTCallback* callback;
 
       /**
        * jednokrotny przebieg pętli odświeżania 
@@ -71,27 +54,38 @@ namespace MQTT_Client_NS
       /**
        * wybranie typu połączenia
        */
-      bool setConnectionType(std::string);
+      bool setConnectionType(const std::string&);
       
       /**
        * ustawienie callbacka dla danych odbieranych
        */
-      void setCallback(callback_t);
+      void setCallback(MQTTCallback*);
 
       /**
        * ustawienie portu połączenia sieciowego
        */
-      void setPort(port_t);
+      void setPort(const port_t&);
 
-      /**
-       * ustawienie adresu połaczenia sieciowego
-       */
-      void setAddress(std::string&);
+	  /**
+	   * ustawienie adresu połaczenia sieciowego
+	   */
+	  void setAddress(const std::string&);
 
-      /**
-       * ustawienie adresu połaczenia sieciowego
-       */
-      void setAddress(const char*);
+	  /**
+	   * ustawienie adresu połaczenia sieciowego
+	   */
+	  void setAddress(const char*);
+
+
+	  /**
+	   * ustawienie nazwy klienta
+	   */
+	  void setClientID(const std::string&);
+
+	  /**
+	   * ustawienie nazwy klienta
+	   */
+	  void setClientID(const char*);
 
       /**
        * próba nawiązania połaczenia sieciowego
@@ -106,7 +100,7 @@ namespace MQTT_Client_NS
       /**
        * zasubskrybowanie topicu
        */
-      bool subscribe(std::string&);
+      bool subscribe(const std::string&);
 
       /**
        * zasubskrybowanie topicu
@@ -116,7 +110,7 @@ namespace MQTT_Client_NS
       /**
        * usunięcie subskrybcji topicu
        */
-      bool unsubscribe(std::string&);
+      bool unsubscribe(const std::string&);
 
       /**
        * usunięcie subskrybcji topicu
@@ -126,12 +120,12 @@ namespace MQTT_Client_NS
       /**
        * publikacja wiadomości na topicu
        */
-      bool publish(std::string&, MQTT_Data_t&);
+      bool publish(const std::string&, const MQTT_Data_t&);
 
       /**
        * publikacja wiadomości na topicu
        */
-      bool publish(const char*, MQTT_Data_t&);
+      bool publish(const char*, const MQTT_Data_t&);
 
 
       MQTT_Client();

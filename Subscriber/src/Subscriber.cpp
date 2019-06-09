@@ -6,48 +6,50 @@
 #include "../include/Subscriber.hpp"
 #include <iostream>
 
-#include <MQTT_Client.hpp>
 #include <DataStore.hpp>
-#include <DataJSON.hpp>
 
-using namespace MQTT_Client_NS;
 using namespace DataStore_NS;
-using namespace std;
+using namespace MQTT_Client_NS;
 
-DataStore dataStore;
-MQTT_Client client;
 
+
+////////////////////////////////////////////////////////////////
 int main()
 {
+	SubscriberCallbacks callbacks;
+	DataStore dataStore;
+	MQTT_Client client;
+
 	std::cout << "Hello World!: Subscriber\n";
 	DataJSON *dataJSON = new DataJSON();
 	dataJSON->readJSONFromFile("exampleJSON2.json");
-	client.setPort(1883);
-	client.setAddress("test.mosquitto.org");
+	client.setAddress(MQTTBrokerAddress);
+	client.setClientID(ClientID);
 	client.connect();
-	client.setCallback(callbackFun);
+	client.setCallback(&callbacks);
 
-	client.subscribe("#");
+	client.subscribe(TopicSubscribeName);
 
 	client.spinOnce();
 	client.spinOnce();
 	client.spinOnce();
 
-	client.unsubscribe("#");
-	client.disconnect();	
+	client.unsubscribe(TopicSubscribeName);
+	client.disconnect();
 
 }
 
-
-bool callbackFun(MQTT_Client::MQTT_Data_t& data )
+void SubscriberCallbacks::callbackDelivered(MQTTCallback::MQTTClientContext_t context, MQTTClient_deliveryToken token)
 {
-	string localData;
 
-	cout<<"callbackFun: topic: "<<data.topic<<"; data: "<<data.data<<"; "<<endl;
+}
 
-	localData = data.data;
+void SubscriberCallbacks::callbackMesageArrived(MQTTCallback::MQTTClientContext_t context, MQTT_Data_t& data)
+{
 
-	dataStore.writeData(localData);
+}
 
-	return false;
+void SubscriberCallbacks::callbackConnectionLost(MQTTCallback::MQTTClientContext_t context, std::string& cause)
+{
+
 }

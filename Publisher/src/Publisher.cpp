@@ -37,5 +37,9 @@ int main()
 		client.publish(topic, data);
 	}
 
+	client.publish(topic, data);
+	client.publish(topic, data);
+	client.publish(topic, data);
+
 	client.disconnect();
 }
