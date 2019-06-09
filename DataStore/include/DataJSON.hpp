@@ -9,6 +9,8 @@
 #include <string>
 #include "../include/DataArchive.hpp"
 #include "../src/json/json.h" //this file add library for json serialization 
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 using namespace std;
 
