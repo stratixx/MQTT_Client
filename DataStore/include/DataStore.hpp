@@ -6,7 +6,7 @@
 #ifndef DataStore_H
 #define DataStore_H
 
-//#include <boost/smart_ptr.hpp>
+#include <boost/smart_ptr.hpp>
 #include <string>
 
 namespace DataStore_NS
