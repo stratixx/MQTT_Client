@@ -14,11 +14,11 @@ BOOST_AUTO_TEST_CASE( test_1 )
 	string currentPath;
 	DataJSON dataJSON;
 	currentPath = dataJSON.getCurrentWorkingDirectory();
-	
-	size_t pos = currentPath.find("MQTT_Client");
+
+	size_t pos = currentPath.find("build");
 
 	currentPath = currentPath.substr(pos);
-	string rightPath = string("MQTT_Client/build/DataStore");
+	string rightPath = string("build/DataStore");
     #ifdef _WIN32
         std::replace( rightPath.begin(), rightPath.end(), '/', filePathSeparator)
     #endif
