@@ -19,11 +19,9 @@ const int Timeout = 10000L;
 class SubscriberCallbacks : public MQTTCallback
 {
 public:
-	void callbackDelivered(MQTTCallback::MQTTClientContext_t context, MQTTClient_deliveryToken token);
+	void callbackMessageArrived(MQTT_Data_t& data) override;
 
-	void callbackMesageArrived(MQTTCallback::MQTTClientContext_t context, MQTT_Data_t& data);
-
-	void callbackConnectionLost(MQTTCallback::MQTTClientContext_t context, std::string& cause);
+	void callbackConnectionLost(std::string& cause) override;
 };
 
 #endif

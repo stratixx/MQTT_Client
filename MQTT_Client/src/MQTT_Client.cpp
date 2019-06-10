@@ -20,9 +20,13 @@
 
 namespace MQTT_Client_NS
 {
+	MQTT_Client::clients_t MQTT_Client::clients = MQTT_Client::clients_t();
+
 
     bool MQTT_Client::spinOnce()
 	{
+
+
 
 		bool result = false;
 		MQTT_Data_t data;
@@ -39,10 +43,8 @@ namespace MQTT_Client_NS
 				return false;*/
 
 
-			MQTTCallback::MQTTClientContext_t context = nullptr;
 
-
-			callback->callbackMesageArrived(context, data);
+			callback->callbackMessageArrived(data);
 			result = true;
 		}
 		
@@ -111,50 +113,33 @@ namespace MQTT_Client_NS
 
 	bool MQTT_Client::connect()
 	{
+		int rc;
+
+		MQTTClient_setCallbacks(libraryClient, (void*)context, connlost, msgarrvd, delivered);
+		MQTT_Client::clients[context] = this;
+
+		if ((rc = MQTTClient_connect(libraryClient, &connectOptions)) != MQTTCLIENT_SUCCESS)
+		{
+			printf("Failed to connect, return code %d\n", rc);
+			MQTT_Client::clients.erase(context);
+			return false;
+		}
 
 		return true;
 	}
 
 	void MQTT_Client::disconnect()
 	{
-
+		MQTTClient_disconnect(libraryClient, 10000);
+		MQTT_Client::clients.erase(context);
 	}
 
 	
 	bool MQTT_Client::subscribe(const std::string& topic)
 	{
-/*
-		MQTTClient client;
-		MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
-		int rc;
-		int ch;
+		MQTTClient_subscribe(libraryClient, topic.c_str(), 1);
 
-		MQTTClient_create(&client, ADDRESS, CLIENTID,
-			MQTTCLIENT_PERSISTENCE_NONE, NULL);
-		conn_opts.keepAliveInterval = 20;
-		conn_opts.cleansession = 1;
-
-		MQTTClient_setCallbacks(client, NULL, connlost, msgarrvd, delivered);
-
-		if ((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
-		{
-			printf("Failed to connect, return code %d\n", rc);
-			exit(EXIT_FAILURE);
-		}
-		printf("Subscribing to topic %s\nfor client %s using QoS%d\n\n"
-			"Press Q<Enter> to quit\n\n", TOPIC, CLIENTID, QOS);
-		MQTTClient_subscribe(client, TOPIC, QOS);
-
-		do
-		{
-			ch = getchar();
-		} while (ch != 'Q' && ch != 'q');
-
-		MQTTClient_unsubscribe(client, TOPIC);
-		MQTTClient_disconnect(client, 10000);
-		MQTTClient_destroy(&client);
-		return rc==0;*/
-		return false;
+		return true;
 	}
 
 	bool MQTT_Client::subscribe(const char* topic_)
@@ -186,6 +171,23 @@ namespace MQTT_Client_NS
 		return publish(topic, data);
 	}
 
+	MQTT_Client::MQTT_Client( const address_t& address_, const clientID_t& clientID_) : 
+		address(address_), 
+		clientID(clientID_)
+	{
+		MQTTClient_create(&libraryClient, address.c_str(), clientID.c_str(),
+			MQTTCLIENT_PERSISTENCE_NONE, NULL);
+
+		connectOptions = MQTTClient_connectOptions_initializer;
+		connectOptions.keepAliveInterval = 20;
+		connectOptions.cleansession = 1;
+
+		context = getNewContext();
+		MQTTClient_setCallbacks(libraryClient, (void*)context, connlost, msgarrvd, delivered);
+
+		MQTT_Client::clients[context] = this;
+	}
+
 	MQTT_Client::MQTT_Client()
 	{
 		connection = (Connection*)nullptr;
@@ -198,6 +200,75 @@ namespace MQTT_Client_NS
 	{
 		if (connection != nullptr)
 			delete connection;
+
+		MQTT_Client::clients.erase(context);
+	}
+
+
+	MQTT_Client::MQTTClientContext_t MQTT_Client::getNewContext()
+	{
+		static MQTT_Client::MQTTClientContext_t context = 0;
+
+		return ++context;
+	}
+
+	void MQTT_Client::delivered(void *context, MQTTClient_deliveryToken dt)
+	{
+		int context_ = (int)context;
+
+		MQTT_Client::clients_t::iterator iter =  MQTT_Client::clients.find(context_);
+
+		if (iter == MQTT_Client::clients.end())
+		{
+			// not found
+		}
+		else
+		{
+			iter->second->callback->callbackDelivered(dt);
+		}
+	}
+
+	int MQTT_Client::msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message)
+	{
+		int context_ = (int)context;
+
+		clients_t::iterator iter = MQTT_Client::clients.find(context_);
+
+		if (iter == MQTT_Client::clients.end())
+		{
+			// not found
+			return -1;
+		}
+		else
+		{
+			MQTT_Data_t data;
+			char * payloadPtr = (char*)message->payload;
+
+			//data.dataType = MQTT_Data_t::data_t::STRING;
+			data.topic.assign(topicName, topicLen);
+			data.dataVector.reserve(message->payloadlen);
+			data.dataVector.insert(data.dataVector.end(), &(payloadPtr[0]), &(payloadPtr[message->payloadlen]));
+
+			iter->second->callback->callbackMessageArrived(data);
+			return 0;
+		}
+	}
+
+	void MQTT_Client::connlost(void *context, char *cause)
+	{
+		MQTT_Client::MQTTClientContext_t context_ = (MQTT_Client::MQTTClientContext_t)context;
+
+		MQTT_Client::clients_t::iterator iter = MQTT_Client::clients.find(context_);
+
+		if (iter == MQTT_Client::clients.end())
+		{
+			// not found
+		}
+		else
+		{
+			iter->second->callback->callbackConnectionLost(std::string(cause));
+		}
+		
 	}
 
 }
