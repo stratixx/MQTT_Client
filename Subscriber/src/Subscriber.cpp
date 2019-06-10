@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include <DataStore.hpp>
+#include <DataJSON.hpp>
 
 using namespace DataStore_NS;
 using namespace MQTT_Client_NS;
@@ -21,6 +22,11 @@ int main()
 	MQTT_Client client;
 
 	std::cout << "Hello World!: Subscriber\n";
+
+	DataJSON *dataJSON = new DataJSON();
+	MQTT_Data_t exampleData;
+	dataJSON->writeJSONToFile("exampleJSON2.json", exampleData);
+
 	client.setAddress(MQTTBrokerAddress);
 	client.setClientID(ClientID);
 	client.connect();
