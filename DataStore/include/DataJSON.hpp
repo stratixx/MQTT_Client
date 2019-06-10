@@ -21,7 +21,7 @@ class DataJSON
 public:
 	DataJSON();
 	~DataJSON();
-	void writeJSONToFile(string fileName, MQTT_Data_t messageFromBroker);
+	void writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker);
 	string readJSONFromFile(string fileName);
 	string getCurrentWorkingDirectory();
 	ifstream loadJsonFile(string fileName);

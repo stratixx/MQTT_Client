@@ -28,20 +28,10 @@ int main()
 
 	std::cout << "Hello World!: Subscriber\n";
 
-<<<<<<< HEAD
 	DataJSON *dataJSON = new DataJSON();
-	MQTT_Data_t exampleData;
-	dataJSON->writeJSONToFile("exampleJSON2.json", exampleData);
-
-	client.setAddress(MQTTBrokerAddress);
-	client.setClientID(ClientID);
-=======
-
-
-
+	
 	//client.setAddress(MQTTBrokerAddress);
 	//client.setClientID(ClientID);
->>>>>>> cbd2acf0fe4c888b5b6d613b6d415b91b6a3101f
 	client.connect();
 	client.setCallback(&callbacks);
 
@@ -65,7 +55,9 @@ void SubscriberCallbacks::callbackMessageArrived(MQTT_Data_t& data)
 	std::copy(data.dataVector.begin(), data.dataVector.end(),
 		std::ostream_iterator<char>(std::cout, ""));
 	cout << endl;
-	
+
+	DataJSON *dataJSON = new DataJSON();
+	dataJSON->writeJSONToFile("writingExampleJSON2.json", data);	
 }
 
 void SubscriberCallbacks::callbackConnectionLost(std::string& cause)

@@ -10,6 +10,8 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <cstring>
+#include <cstdlib>
 
 #include <stdio.h>  /* defines FILENAME_MAX */
 #include <boost/foreach.hpp>
@@ -94,7 +96,7 @@ string DataJSON::readJSONFromFile(string fileName)
 	return lineToReturn;
 }
 
-void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t messageFromBroker)
+void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker)
 {
 	string writingPath;
 	string currentPath = this->getCurrentWorkingDirectory();
@@ -106,14 +108,24 @@ void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t messageFromBroker)
 
 	// tu zmienic na zmienna topic z MQTT Data 
 	string goOtrzymuje = "/merakimv/Q2HV-6YJL-JGJ4/raw_detections"; //topic
-	std::string s = "/merakimv/Q2HV-6YJL-JGJ4/raw_detections";
+	std::string s = messageFromBroker.topic;
 	std::replace(s.begin(), s.end(), '/', '\\'); 
 	cout << endl;
-	writingPath = currentPath + s;
-
-	cout << "CCCCCCCCCCCCC: " << s << endl;
+	
+	std::size_t a;
+	std::size_t b;
+	a = s.find("\\");
+	if (a != std::string::npos)
+		cout << "A:: "<<a << endl;
+	b = s.find("\\", a + 1);
+	if (b != std::string::npos)
+		cout <<"B:: "<<b << endl;
+	string temp = s.substr(a, b);
+	cout << "Z ucinania" << temp<<endl;
+	writingPath = currentPath + temp;
+	cout << "Writing: " << writingPath << endl;
 	int check;
-	const char *c = s.c_str();
+	const char *c = writingPath.c_str();
 	check = mkdir(c);
 	if (!check)
 		printf("Directory created\n");
@@ -139,7 +151,7 @@ void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t messageFromBroker)
 	*/
 }
 
-void replaceFunction() {
+void DataJSON::replaceFunction() {
 	std::string s = "example string";
 	std::replace(s.begin(), s.end(), 'x', 'y'); // replace all 'x' to 'y'
 }
