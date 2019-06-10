@@ -26,6 +26,7 @@ public:
 	string getCurrentWorkingDirectory();
 	ifstream loadJsonFile(string fileName);
 	void replaceFunction();
+	string DataJSON::getStringForPath(string stringIn);
 };
 
 #endif

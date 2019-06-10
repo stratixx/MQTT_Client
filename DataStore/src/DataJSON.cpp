@@ -106,49 +106,56 @@ void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker)
 	currentPath += directoryDatabase;
 	cout << currentPath;
 
-	// tu zmienic na zmienna topic z MQTT Data 
 	string goOtrzymuje = "/merakimv/Q2HV-6YJL-JGJ4/raw_detections"; //topic
 	std::string s = messageFromBroker.topic;
 	std::replace(s.begin(), s.end(), '/', '\\'); 
 	cout << endl;
 	
+	while (!s.empty())
+	{
+		//string sOrginal = s;
+		string temp = getStringForPath(s);
+
+		cout << "Z ucinania" << temp << endl;
+		writingPath = currentPath + temp;
+		cout << "Writing: " << writingPath << endl;
+
+		int check;
+		const char *c = writingPath.c_str();
+		check = mkdir(c);
+		if (!check) {
+			printf("Directory created\n");
+			currentPath = currentPath + temp;
+		}
+		else {
+			printf("Unable to create directory\n");
+			currentPath = currentPath + temp;
+			return ;
+		}
+
+		std::size_t pos = s.find(temp);
+		s = s.substr(pos+temp.length());
+		cout << "AFTER SUBSTR" << s<<endl;
+	}
+}
+
+string DataJSON::getStringForPath(string s)
+{
 	std::size_t a;
 	std::size_t b;
+	string temp;
 	a = s.find("\\");
 	if (a != std::string::npos)
-		cout << "A:: "<<a << endl;
+		cout << "A:: " << a << endl;
 	b = s.find("\\", a + 1);
-	if (b != std::string::npos)
-		cout <<"B:: "<<b << endl;
-	string temp = s.substr(a, b);
-	cout << "Z ucinania" << temp<<endl;
-	writingPath = currentPath + temp;
-	cout << "Writing: " << writingPath << endl;
-	int check;
-	const char *c = writingPath.c_str();
-	check = mkdir(c);
-	if (!check)
-		printf("Directory created\n");
-	else {
-		printf("Unable to create directory\n");
-		return ;
+	if (b != std::string::npos) {
+		cout << "B:: " << b << endl;
+		temp = s.substr(a, b);
 	}
-	//boost::filesystem::create_directory(s);
-	/*int check;
-	int length = s.length();
-	char arrayMkdir[length + 1];
-	strcpy(arrayM)
-	check = mkdir((char)s);*/
-
-	/*
-	Json::Value root;
-	Json::StreamWriterBuilder wbuilder;
-	wbuilder["indentation"] = "\t";
-	std::string document = Json::writeString(wbuilder, root);
-	std::ofstream output_file(fileName);
-	output_file << document;
-	output_file.close();
-	*/
+	else {
+		temp = s.substr(a);
+	}
+	return temp;
 }
 
 void DataJSON::replaceFunction() {
