@@ -13,12 +13,20 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 
+#ifdef _WIN32	
+    #define filePathSeparator '\\'
+#elif __linux__
+	#define filePathSeparator '/'
+#else
+	#error("Unsuportted OS")
+#endif
 
 using namespace std;
 
 class DataJSON 
 {
 public:
+
 	DataJSON();
 	~DataJSON();
 	void writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker);

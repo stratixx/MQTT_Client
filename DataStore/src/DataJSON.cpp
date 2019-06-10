@@ -8,6 +8,7 @@
 #include <fstream>
 #include "json/json.h" //this file add library for json serialization 
 #include <iostream>
+#include <fstream>
 #include <algorithm>
 #include <string>
 #include <cstring>
@@ -48,6 +49,10 @@ string DataJSON::getCurrentWorkingDirectory()
 
 ifstream DataJSON::loadJsonFile(string fileName)
 {
+	
+    // #ifdef _WIN32
+    //     std::replace( fileName.begin(), fileName.end(), '/', filePathSeparator)
+    // #endif
 	//string beginOfString = string("./");
 	//fileName = beginOfString + fileName;
 	std::ifstream data_file(fileName, std::ifstream::in);
@@ -105,14 +110,26 @@ void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker)
 	string writingPath;
 	string currentPath = this->getCurrentWorkingDirectory();
 	std::size_t pos = currentPath.find("build");
+
+	// ścieżka do pliku wraz z nazwą message.json
+	std::string fileJSONPath;
+	ofstream fileJSON;
+
+
 	currentPath = currentPath.substr(0, pos);
 	string directoryDatabase = string("Database");
 	currentPath += directoryDatabase;
-	cout << currentPath;
+	cout << "currentPath: " << currentPath <<std::endl;
 
-	string goOtrzymuje = "/merakimv/Q2HV-6YJL-JGJ4/raw_detections"; //topic
+	//string goOtrzymuje = "/merakimv/Q2HV-6YJL-JGJ4/raw_detections"; //topic
 	std::string s = messageFromBroker.topic;
-	std::replace(s.begin(), s.end(), '/', '\\'); 
+
+	fileJSONPath = currentPath + s + filePathSeparator + "message.json";
+	cout << "fileJSONPath: " << fileJSONPath <<std::endl;
+	
+    #ifdef _WIN32
+        std::replace( s.begin(), s.end(), '/', filePathSeparator)
+    #endif
 	cout << endl;
 	
 	while (!s.empty())
@@ -136,13 +153,21 @@ void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker)
 		else {
 			printf("Unable to create directory\n");
 			currentPath = currentPath + temp;
-			return ;
+			break;
 		}
 
 		std::size_t pos = s.find(temp);
 		s = s.substr(pos+temp.length());
 		cout << "AFTER SUBSTR" << s<<endl;
 	}
+
+	fileJSON.open(fileJSONPath, ios::app);
+	//fileJSON << "{ \n";
+	std::copy(messageFromBroker.dataVector.begin(), messageFromBroker.dataVector.end(),
+		std::ostream_iterator<char>(fileJSON, ""));
+	//fileJSON << "\n } \n";
+	fileJSON << ", \n";
+	fileJSON.close();
 }
 
 string DataJSON::getStringForPath(string s)
@@ -150,10 +175,10 @@ string DataJSON::getStringForPath(string s)
 	std::size_t a;
 	std::size_t b;
 	string temp;
-	a = s.find("\\");
+	a = s.find(filePathSeparator);
 	if (a != std::string::npos)
 		cout << "A:: " << a << endl;
-	b = s.find("\\", a + 1);
+	b = s.find(filePathSeparator, a + 1);
 	if (b != std::string::npos) {
 		cout << "B:: " << b << endl;
 		temp = s.substr(a, b);
