@@ -10,7 +10,7 @@
 * \file Connection.cpp
 * \brief Header of connection file
 */
-* 
+
 /**********************************************************************************************//**
  * \fn	Connection::Connection()
  *

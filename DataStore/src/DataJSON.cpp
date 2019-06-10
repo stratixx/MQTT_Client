@@ -7,7 +7,7 @@
 /*! \file DataJSON.cpp
 	\brief A implementation of DataJSON class.
 */
-* 
+
 #include "../include/DataJSON.hpp"
 #include <iostream>
 #include <fstream>
