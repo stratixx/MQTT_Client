@@ -20,11 +20,15 @@
 //#include <boost/filesystem.hpp>
 
 #ifdef _WIN32
-#include <direct.h>
-#define GetCurrentDir _getcwd
+	#include <direct.h>
+	#define GetCurrentDir _getcwd
+#elif __linux__
+	#include <unistd.h>
+	#define GetCurrentDir getcwd
+	#include <sys/stat.h>
+	#define mkdir(path) mkdir(path, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)
 #else
-#include <unistd.h>
-#define GetCurrentDir getcwd
+	#error("Unsuportted OS")
 #endif
 
 using namespace std; 
@@ -122,7 +126,9 @@ void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker)
 
 		int check;
 		const char *c = writingPath.c_str();
+
 		check = mkdir(c);
+
 		if (!check) {
 			printf("Directory created\n");
 			currentPath = currentPath + temp;
