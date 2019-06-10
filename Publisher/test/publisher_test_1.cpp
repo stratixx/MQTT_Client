@@ -3,6 +3,10 @@
 #define BOOST_TEST_MODULE TestModule1
 #include <boost/test/unit_test.hpp>
 
+/*! \file publisher_test_1.cpp
+	\brief File with tests for Publisher
+*/
+
 BOOST_AUTO_TEST_CASE( test_1 )
 {
     using namespace std;

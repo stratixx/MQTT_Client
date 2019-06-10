@@ -6,6 +6,10 @@
 
 using namespace DataStore_NS;
 
+/*! \file dataStore_test_1.cpp
+	\brief File with tests for DataStore
+*/
+
 BOOST_AUTO_TEST_CASE( test_1 )
 {
     using namespace std;
@@ -28,10 +32,3 @@ BOOST_AUTO_TEST_CASE( test_1 )
     BOOST_CHECK(true);
     
 }
-
-
-
-// int main()
-// {
-//     return -1;
-// }

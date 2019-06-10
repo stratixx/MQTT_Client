@@ -3,6 +3,11 @@
 *
 *
 */
+ 
+/*! \file DataJSON.cpp
+	\brief A implementation of DataJSON class.
+*/
+* 
 #include "../include/DataJSON.hpp"
 #include <iostream>
 #include <fstream>
@@ -18,8 +23,6 @@
 #include <boost/foreach.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 
-//#include <boost/filesystem.hpp>
-
 #ifdef _WIN32
 	#include <direct.h>
 	#define GetCurrentDir _getcwd
@@ -34,9 +37,47 @@
 
 using namespace std; 
 
+/**********************************************************************************************//**
+ * \fn	DataJSON::DataJSON()
+ *
+ * \brief	Default constructor
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ **************************************************************************************************/
+
 DataJSON::DataJSON() {}
 
+/*!
+ * @fn	DataJSON::~DataJSON()
+ *
+ * @brief	Destructor
+ *
+ * @author	Marcin Dolicher
+ * @date	10.06.2019
+ */
+
+/**********************************************************************************************//**
+ * \fn	DataJSON::~DataJSON()
+ *
+ * \brief	Destructor
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ **************************************************************************************************/
+
 DataJSON::~DataJSON() {}
+
+/**********************************************************************************************//**
+ * \fn	string DataJSON::getCurrentWorkingDirectory()
+ *
+ * \brief	Gets current working directory
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ *
+ * \returns	The current working directory.
+ **************************************************************************************************/
 
 string DataJSON::getCurrentWorkingDirectory()
 {
@@ -46,6 +87,19 @@ string DataJSON::getCurrentWorkingDirectory()
 	std::cout << current_working_dir << std::endl;
 	return current_working_dir;
 }
+
+/**********************************************************************************************//**
+ * \fn	ifstream DataJSON::loadJsonFile(string fileName)
+ *
+ * \brief	Loads JSON file
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ *
+ * \param	fileName	Filename of the file.
+ *
+ * \returns	The JSON file.
+ **************************************************************************************************/
 
 ifstream DataJSON::loadJsonFile(string fileName)
 {
@@ -64,6 +118,19 @@ ifstream DataJSON::loadJsonFile(string fileName)
 	
 	return data_file;
 }
+
+/**********************************************************************************************//**
+ * \fn	string DataJSON::readJSONFromFile(string fileName)
+ *
+ * \brief	Reads JSON from file
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ *
+ * \param	fileName	Filename of the file.
+ *
+ * \returns	The JSON from file.
+ **************************************************************************************************/
 
 string DataJSON::readJSONFromFile(string fileName)
 {
@@ -104,6 +171,18 @@ string DataJSON::readJSONFromFile(string fileName)
 	cout << "The file was load" << endl;
 	return lineToReturn;
 }
+
+/**********************************************************************************************//**
+ * \fn	void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker)
+ *
+ * \brief	Writes a JSON to file
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ *
+ * \param 		  	fileName		 	Filename of the file.
+ * \param [in,out]	messageFromBroker	The message from broker.
+ **************************************************************************************************/
 
 void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker)
 {
@@ -170,6 +249,19 @@ void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker)
 	fileJSON.close();
 }
 
+/**********************************************************************************************//**
+ * \fn	string DataJSON::getStringForPath(string s)
+ *
+ * \brief	Gets string for path
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ *
+ * \param	s	The string.
+ *
+ * \returns	The string for path.
+ **************************************************************************************************/
+
 string DataJSON::getStringForPath(string s)
 {
 	std::size_t a;
@@ -188,6 +280,15 @@ string DataJSON::getStringForPath(string s)
 	}
 	return temp;
 }
+
+/**********************************************************************************************//**
+ * \fn	void DataJSON::replaceFunction()
+ *
+ * \brief	Replace function
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ **************************************************************************************************/
 
 void DataJSON::replaceFunction() {
 	std::string s = "example string";

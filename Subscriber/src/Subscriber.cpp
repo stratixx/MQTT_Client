@@ -17,6 +17,9 @@ using namespace DataStore_NS;
 using namespace MQTT_Client_NS;
 
 
+/*! \file Subscriber.cpp
+	\brief Implementation of subscriber function. 
+*/
 
 ////////////////////////////////////////////////////////////////
 int main()
@@ -47,6 +50,17 @@ int main()
 
 }
 
+/**********************************************************************************************//**
+ * \fn	void SubscriberCallbacks::callbackMessageArrived(MQTT_Data_t& data)
+ *
+ * \brief	Callback message arrived
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ *
+ * \param [in,out]	data	The data.
+ **************************************************************************************************/
+
 void SubscriberCallbacks::callbackMessageArrived(MQTT_Data_t& data)
 {
 	cout << "Message arrived: " << endl;
@@ -58,6 +72,17 @@ void SubscriberCallbacks::callbackMessageArrived(MQTT_Data_t& data)
 
 	dataJSON.writeJSONToFile("writingExampleJSON2.json", data);	
 }
+
+/**********************************************************************************************//**
+ * \fn	void SubscriberCallbacks::callbackConnectionLost(std::string& cause)
+ *
+ * \brief	Callback connection lost
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ *
+ * \param [in,out]	cause	The cause.
+ **************************************************************************************************/
 
 void SubscriberCallbacks::callbackConnectionLost(std::string& cause)
 {

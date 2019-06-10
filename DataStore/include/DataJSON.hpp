@@ -3,6 +3,9 @@
 *
 *
 */
+/*! \file DataJSON.hpp
+	\brief A header file of DataJSON class.
+*/
 #ifndef DATAJSON_H
 #define DATAJSON_H
 
@@ -22,6 +25,15 @@
 #endif
 
 using namespace std;
+
+/**********************************************************************************************//**
+ * \class	DataJSON
+ *
+ * \brief	A data json.
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ **************************************************************************************************/
 
 class DataJSON 
 {

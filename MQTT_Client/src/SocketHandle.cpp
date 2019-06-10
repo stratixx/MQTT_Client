@@ -2,15 +2,49 @@
 #include <boost/smart_ptr.hpp>
 #include <string>
 
+/*!
+* \file SocketHandle.cpp
+* \brief Implementation a mechanism for socket handle
+*/
+
+/**********************************************************************************************//**
+ * \fn	SocketHandle::SocketHandle()
+ *
+ * \brief	Default constructor
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ **************************************************************************************************/
+
 SocketHandle::SocketHandle()
 {
 
 }
 
+/**********************************************************************************************//**
+ * \fn	SocketHandle::~SocketHandle()
+ *
+ * \brief	Destructor
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ **************************************************************************************************/
+
 SocketHandle::~SocketHandle()
 {
 
 }
+
+/**********************************************************************************************//**
+ * \fn	int sockInit(void)
+ *
+ * \brief	Sock initialize
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ *
+ * \returns	An int.
+ **************************************************************************************************/
 
 int sockInit(void)
 {
@@ -22,6 +56,17 @@ int sockInit(void)
 #endif
 }
 
+/**********************************************************************************************//**
+ * \fn	int sockQuit(void)
+ *
+ * \brief	Sock quit
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ *
+ * \returns	An int.
+ **************************************************************************************************/
+
 int sockQuit(void)
 {
 #ifdef _WIN32
@@ -30,6 +75,19 @@ int sockQuit(void)
 	return 0;
 #endif
 }
+
+/**********************************************************************************************//**
+ * \fn	int sockClose(SOCKET sock)
+ *
+ * \brief	Sock close
+ *
+ * \author	Marcin Dolicher
+ * \date	10.06.2019
+ *
+ * \param	sock	The sock.
+ *
+ * \returns	An int.
+ **************************************************************************************************/
 
 int sockClose(SOCKET sock)
 {
