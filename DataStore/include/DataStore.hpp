@@ -9,6 +9,14 @@
 #include <boost/smart_ptr.hpp>
 #include <string>
 
+#ifdef _WIN32	
+    #define filePathSeparator '\\'
+#elif __linux__
+	#define filePathSeparator '/'
+#else
+	#error("Unsuportted OS")
+#endif
+
 namespace DataStore_NS
 {
     using namespace std;

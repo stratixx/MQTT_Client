@@ -48,8 +48,8 @@ string DataJSON::getCurrentWorkingDirectory()
 
 ifstream DataJSON::loadJsonFile(string fileName)
 {
-	string beginOfString = string("./");
-	fileName = beginOfString + fileName;
+	//string beginOfString = string("./");
+	//fileName = beginOfString + fileName;
 	std::ifstream data_file(fileName, std::ifstream::in);
 
 	if (data_file.good() == true)

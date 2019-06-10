@@ -22,13 +22,13 @@ using namespace MQTT_Client_NS;
 int main()
 {
 	SubscriberCallbacks callbacks;
-	DataStore dataStore;
+	//DataStore dataStore;
 	MQTT_Client client(MQTTBrokerAddress, ClientID);
 	int ch;
 
 	std::cout << "Hello World!: Subscriber\n";
 
-	DataJSON *dataJSON = new DataJSON();
+	//DataJSON *dataJSON = new DataJSON();
 	
 	//client.setAddress(MQTTBrokerAddress);
 	//client.setClientID(ClientID);
@@ -56,11 +56,15 @@ void SubscriberCallbacks::callbackMessageArrived(MQTT_Data_t& data)
 		std::ostream_iterator<char>(std::cout, ""));
 	cout << endl;
 
-	DataJSON *dataJSON = new DataJSON();
-	dataJSON->writeJSONToFile("writingExampleJSON2.json", data);	
+	dataJSON.writeJSONToFile("writingExampleJSON2.json", data);	
 }
 
 void SubscriberCallbacks::callbackConnectionLost(std::string& cause)
 {
 	cout << "Connection lost!" << endl;
+}
+
+SubscriberCallbacks::SubscriberCallbacks()
+{
+
 }

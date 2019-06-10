@@ -9,9 +9,14 @@ BOOST_AUTO_TEST_CASE( test_2 )
 {
     using namespace std;
 
+    string pathJSON = "../../DataStore/src/exampleJSON.json";
+    #ifdef _WIN32
+        std::replace( pathJSON.begin(), pathJSON.end(), '/', filePathSeparator)
+    #endif
+
     cout<<"TestModule2 test_2 "<<endl;
 	DataJSON dataJSON;
-	ifstream data_file = dataJSON.loadJsonFile("exampleJSON.json");
+	ifstream data_file = dataJSON.loadJsonFile(pathJSON);
 
     BOOST_CHECK(data_file.good() ==true);
 	data_file.close();
