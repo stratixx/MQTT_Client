@@ -7,6 +7,10 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 
+/*! \file dataStore_test_3.cpp
+	\brief File with tests for DataStore
+*/
+
 BOOST_AUTO_TEST_CASE( test_3 )
 {
     using namespace std;

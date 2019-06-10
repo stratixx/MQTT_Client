@@ -5,6 +5,10 @@
 #include "../include/DataStore.hpp"
 #include "../include/DataJSON.hpp"
 
+/*! \file dataStore_test_2.cpp
+	\brief File with tests for DataStore
+*/
+
 BOOST_AUTO_TEST_CASE( test_2 )
 {
     using namespace std;

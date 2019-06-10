@@ -6,7 +6,10 @@
 
 #ifndef MQTT_CLIENT_H 
 #define MQTT_CLIENT_H
-
+/*! 
+* \file MQTT_CLIENT.hpp
+* \brief Header of client MQTT Protocol
+*/
 #include <boost/smart_ptr.hpp>
 #include <string>
 #include "Connection.h"
@@ -22,32 +25,100 @@ namespace MQTT_Client_NS
 	using namespace std;
 	using namespace boost;
 
-    /**
-     * Klasa obsługująca protokół MQTT
-    */
+    /**********************************************************************************************//**
+     * \class	MQTT_Client
+     *
+     * \brief	Klasa obsługująca protokół MQTT
+     *
+     * \author	Marcin Dolicher
+     * \date	10.06.2019
+     **************************************************************************************************/
+
     class MQTT_Client
     {
     public:
       //typedef std::shared_ptr<MQTT_Client*>   PMQTT_Client;
       //typedef std::weak_ptr<MQTT_Client*>     PWMQTT_Client;
-			   		 
+
+		/**********************************************************************************************//**
+		 * \typedef	int port_t
+		 *
+		 * \brief	Defines an alias representing the port
+		 **************************************************************************************************/
 
 		typedef int port_t;
+
+		/**********************************************************************************************//**
+		 * \typedef	std::string address_t
+		 *
+		 * \brief	Defines an alias representing the address t
+		 **************************************************************************************************/
+
 		typedef std::string address_t;
+
+		/**********************************************************************************************//**
+		 * \typedef	std::string topicName_t
+		 *
+		 * \brief	Defines an alias representing the topic name t
+		 **************************************************************************************************/
+
 		typedef std::string topicName_t;
+
+		/**********************************************************************************************//**
+		 * \typedef	std::string clientID_t
+		 *
+		 * \brief	Defines an alias representing the client identifier t
+		 **************************************************************************************************/
+
 		typedef std::string clientID_t;
+
+		/**********************************************************************************************//**
+		 * \typedef	int MQTTClientContext_t
+		 *
+		 * \brief	Defines an alias representing context for the mqtt client
+		 **************************************************************************************************/
+
 		typedef int MQTTClientContext_t;
+
+		/**********************************************************************************************//**
+		 * \typedef	std::map<MQTTClientContext_t, MQTT_Client*> clients_t
+		 *
+		 * \brief	Defines an alias representing the clients t
+		 **************************************************************************************************/
+
 		typedef std::map<MQTTClientContext_t, MQTT_Client*> clients_t;
+
+		/**********************************************************************************************//**
+		 * \typedef	MQTTClient libraryClient_t
+		 *
+		 * \brief	Defines an alias representing the library client
+		 **************************************************************************************************/
+
 		typedef MQTTClient libraryClient_t;
+
+    /**********************************************************************************************//**
+     * \typedef	MQTTClient_connectOptions connectOptions_t
+     *
+     * \brief	Defines an alias representing the connect options t
+     **************************************************************************************************/
+
     typedef MQTTClient_connectOptions connectOptions_t;
 
+		/** \brief	The connection */
 		Connection* connection;
+		/** \brief	The port */
 		port_t port;
+		/** \brief	The address */
 		address_t address;
+		/** \brief	Identifier for the client */
 		clientID_t clientID;
+		/** \brief	The callback */
 		MQTTCallback* callback;
+		/** \brief	The context */
 		MQTTClientContext_t context;
+		/** \brief	The library client */
 		libraryClient_t libraryClient;
+    /** \brief	Options for controlling the connect */
     connectOptions_t connectOptions;
 
 
