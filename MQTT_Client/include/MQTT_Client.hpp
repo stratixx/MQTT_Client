@@ -12,8 +12,6 @@
 */
 #include <boost/smart_ptr.hpp>
 #include <string>
-#include "Connection.h"
-#include "SocketHandle.hpp"
 #include "../../paho.mqtt.c/src/MQTTClient.h"
 #include "../include/MQTTCallback.hpp"
 #include "MQTTData.hpp"
@@ -96,6 +94,18 @@ namespace MQTT_Client_NS
 
 		typedef MQTTClient libraryClient_t;
 
+		/**********************************************************************************************//**
+		 * \typedef	enum MQTT_QOS
+		 *
+		 * \brief	Defines an enum representing the QOS option
+		 **************************************************************************************************/
+		typedef enum 
+		{
+			FireAndForget = 0, 
+			AtLeastOnce = 1,
+			OnceAndOneOnly = 2
+		}MQTT_QOS;
+
     /**********************************************************************************************//**
      * \typedef	MQTTClient_connectOptions connectOptions_t
      *
@@ -104,8 +114,6 @@ namespace MQTT_Client_NS
 
     typedef MQTTClient_connectOptions connectOptions_t;
 
-		/** \brief	The connection */
-		Connection* connection;
 		/** \brief	The port */
 		port_t port;
 		/** \brief	The address */
@@ -180,12 +188,12 @@ namespace MQTT_Client_NS
 		/**
 		* zasubskrybowanie topicu
 		*/
-		bool subscribe(const std::string&);
+		bool subscribe(const std::string&, const MQTT_QOS&);
 
 		/**
 		* zasubskrybowanie topicu
 		*/
-		bool subscribe(const char*);
+		bool subscribe(const char*, const MQTT_QOS&);
 
 		/**
 		* usunięcie subskrybcji topicu

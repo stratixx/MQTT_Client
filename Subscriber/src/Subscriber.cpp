@@ -38,7 +38,7 @@ int main()
 	client.connect();
 	client.setCallback(&callbacks);
 
-	client.subscribe(TopicSubscribeName);
+	client.subscribe(TopicSubscribeName, QOS_);
 
 	do
 	{

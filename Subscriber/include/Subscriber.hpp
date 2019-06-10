@@ -20,7 +20,7 @@ const string ClientID("ZPR_MQTT_ClientSub");
 /** \brief	Name of the topic subscribe */
 const string TopicSubscribeName("/merakimv/Q2GV-6GUN-CL8A/light");
 /** \brief	The mqtt qos */
-const int MQTT_QOS = 1;
+const MQTT_Client_NS::MQTT_Client::MQTT_QOS QOS_ = MQTT_Client_NS::MQTT_Client::MQTT_QOS::OnceAndOneOnly;
 /** \brief	The timeout */
 const int Timeout = 10000L;
 

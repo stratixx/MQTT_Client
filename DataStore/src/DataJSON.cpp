@@ -230,7 +230,7 @@ void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker)
 			currentPath = currentPath + temp;
 		}
 		else {
-			printf("Unable to create directory\n");
+			//printf("Unable to create directory\n");
 			currentPath = currentPath + temp;
 			break;
 		}

@@ -10,7 +10,6 @@
 #include <iostream>
 
 
-#include "../include/ConnectionUnencrypted.h"
 
 #pragma comment(lib,"WS2_32")
 #define DEFAULT_BUFLEN 512
@@ -22,97 +21,6 @@ namespace MQTT_Client_NS
 {
 	MQTT_Client::clients_t MQTT_Client::clients = MQTT_Client::clients_t();
 
-    /**********************************************************************************************//**
-     * \fn	bool MQTT_Client::spinOnce()
-     *
-     * \brief	Make a spin once and return a result
-     *
-     * \author	Marcin Dolicher
-     * \date	10.06.2019
-     *
-     * \returns	True if it succeeds, false if it fails.
-     **************************************************************************************************/
-
-    bool MQTT_Client::spinOnce()
-	{
-
-
-
-		bool result = false;
-		MQTT_Data_t data;
-		bool dataReceived = false;
-
-		dataReceived = true;
-		if(dataReceived)
-		{
-			data.data = "MQTT spin once data";
-			data.topic = "testTopic_2137";
-			data.dataType =  MQTT_Data_t::data_t::STRING;
-
-			/*if(callback==nullptr)
-				return false;*/
-
-
-
-			callback->callbackMessageArrived(data);
-			result = true;
-		}
-		
-		return result;
-	}
-
-    /**********************************************************************************************//**
-     * \fn	bool MQTT_Client::spin()
-     *
-     * \brief	Spins this object
-     *
-     * \author	Marcin Dolicher
-     * \date	10.06.2019
-     *
-     * \returns	True if it succeeds, false if it fails.
-     **************************************************************************************************/
-
-    bool MQTT_Client::spin()
-	{
-		try
-		{			
-			while( spinOnce() );
-		}
-		catch(const std::exception& e)
-		{
-
-		}		
-
-		return false;
-	}
-
-	/**********************************************************************************************//**
-	 * \fn	bool MQTT_Client::setConnectionType(const std::string& type)
-	 *
-	 * \brief	Sets connection type
-	 *
-	 * \author	Marcin Dolicher
-	 * \date	10.06.2019
-	 *
-	 * \param	type	The type.
-	 *
-	 * \returns	True if it succeeds, false if it fails.
-	 **************************************************************************************************/
-
-	bool MQTT_Client::setConnectionType(const std::string& type)
-	{
-		if(connection!=nullptr)
-		{
-			connection->disconnect();
-			delete connection;
-			connection = (Connection*)nullptr;
-		}
-
-		if( 0==type.compare("unencrypted") )
-			connection = new ConnectionUnencrypted();
-		
-		return connection != nullptr;
-	}
 
 	/**********************************************************************************************//**
 	 * \fn	void MQTT_Client::setCallback(MQTTCallback* callback_ )
@@ -266,9 +174,9 @@ namespace MQTT_Client_NS
 	 * \returns	True if it succeeds, false if it fails.
 	 **************************************************************************************************/
 
-	bool MQTT_Client::subscribe(const std::string& topic)
+	bool MQTT_Client::subscribe(const std::string& topic, const MQTT_QOS& qos)
 	{
-		MQTTClient_subscribe(libraryClient, topic.c_str(), 1);
+		MQTTClient_subscribe(libraryClient, topic.c_str(), qos);
 
 		return true;
 	}
@@ -286,28 +194,30 @@ namespace MQTT_Client_NS
 	 * \returns	True if it succeeds, false if it fails.
 	 **************************************************************************************************/
 
-	bool MQTT_Client::subscribe(const char* topic_)
+	bool MQTT_Client::subscribe(const char* topic_, const MQTT_QOS& qos)
 	{
 		std::string topic(topic_);
-		return subscribe(topic);
+		return subscribe(topic, qos);
 	}
 
 	/**********************************************************************************************//**
-	 * \fn	bool MQTT_Client::unsubscribe(const std::string& topic_)
+	 * \fn	bool MQTT_Client::unsubscribe(const std::string& topic)
 	 *
 	 * \brief	Unsubscribes the given topic
 	 *
 	 * \author	Marcin Dolicher
 	 * \date	10.06.2019
 	 *
-	 * \param	topic_	The topic.
+	 * \param	topic	The topic.
 	 *
 	 * \returns	True if it succeeds, false if it fails.
 	 **************************************************************************************************/
 
-	bool MQTT_Client::unsubscribe(const std::string& topic_)
+	bool MQTT_Client::unsubscribe(const std::string& topic)
 	{
-		return false;
+		 MQTTClient_unsubscribe(libraryClient, topic.c_str());
+
+		return true;
 	}
 
 	/**********************************************************************************************//**
@@ -409,7 +319,6 @@ namespace MQTT_Client_NS
 
 	MQTT_Client::MQTT_Client()
 	{
-		connection = (Connection*)nullptr;
 		callback = nullptr;
 		port = 0;
 		address = "";
@@ -426,9 +335,6 @@ namespace MQTT_Client_NS
 
 	MQTT_Client::~MQTT_Client()
 	{
-		if (connection != nullptr)
-			delete connection;
-
 		MQTT_Client::clients.erase(context);
 	}
 
