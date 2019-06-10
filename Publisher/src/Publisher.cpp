@@ -15,11 +15,13 @@ using namespace MQTT_Client_NS;
 using namespace DataStore_NS;
 using namespace std;
 
-MQTT_Client client;
-DataStore dataStore;
 
 int main()
 {
+	PublisherCallbacks callbacks;
+	MQTT_Client client(MQTTBrokerAddress, ClientID);
+	DataStore dataStore;
+
     std::cout << "Hello World!: Publisher\n";
 
 	DataJSON *dataJSON = new DataJSON();
@@ -27,24 +29,34 @@ int main()
 
 	MQTT_Data_t data;
 	string localData;
-	string topic("testTopic_2137");
 
-	client.setPort(1883);
-	client.setAddress("https://test.mosquitto.org/");
+	//client.setAddress(MQTTBrokerAddress);
+	//client.setClientID(ClientID);
+	client.setCallback(&callbacks);
 	client.connect();
 
-	data.topic = topic;
+	data.topic = TopicSubscribeName;
 	data.dataType = MQTT_Data_t::data_t::STRING;
 
 	while( (localData=dataStore.readData()).length() > 0 )
 	{
 		data.data = localData;
-		client.publish(topic, data);
+		client.publish(TopicSubscribeName, data);
 	}
 
-	client.publish(topic, data);
-	client.publish(topic, data);
-	client.publish(topic, data);
+	client.publish(TopicSubscribeName, data);
+	client.publish(TopicSubscribeName, data);
+	client.publish(TopicSubscribeName, data);
 
 	client.disconnect();
+}
+
+void PublisherCallbacks::callbackDelivered(MQTTClientDeliveryToken_t& token)
+{
+
+}
+
+void PublisherCallbacks::callbackConnectionLost(std::string& cause)
+{
+
 }

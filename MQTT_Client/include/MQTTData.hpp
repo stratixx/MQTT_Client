@@ -8,6 +8,7 @@
 #define MQTT_DATA_H
 
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -30,9 +31,12 @@ using namespace std;
 
     }data_t;
 
+    typedef vector<char> dataVector_t;
     string data;
+	dataVector_t dataVector;
+    
     data_t dataType;
-    string topic;
+    std::string topic;
   }MQTT_Data_t;
 
 #endif

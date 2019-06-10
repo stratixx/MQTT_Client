@@ -23,11 +23,10 @@ public:
 
   //typedef std::shared_ptr<MQTTCallback>   MQTTCallbackPointer;
   typedef MQTTClient_deliveryToken MQTTClientDeliveryToken_t;
-  typedef void* MQTTClientContext_t;
 
-  virtual void callbackDelivered(MQTTClientContext_t, MQTTClient_deliveryToken)=0;
-  virtual void callbackMesageArrived(MQTTClientContext_t, MQTT_Data_t&)=0;
-  virtual void callbackConnectionLost(MQTTClientContext_t, std::string&)=0;
+  virtual void callbackDelivered(MQTTClientDeliveryToken_t&) {  };
+  virtual void callbackMessageArrived(MQTT_Data_t&) {  };
+  virtual void callbackConnectionLost(std::string&)=0;
 
 private:
 
