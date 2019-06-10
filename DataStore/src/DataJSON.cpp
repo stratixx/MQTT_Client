@@ -7,7 +7,7 @@
 /*! \file DataJSON.cpp
 	\brief A implementation of DataJSON class.
 */
-* 
+
 #include "../include/DataJSON.hpp"
 #include <iostream>
 #include <fstream>
@@ -158,7 +158,7 @@ string DataJSON::readJSONFromFile(string fileName)
 		while (getline(in, lineToReturn))
 		{
 			std::string tmp; // strip whitespaces from the beginning
-			for (int i = 0; i < lineToReturn.length(); i++)
+			for (unsigned int i = 0; i < lineToReturn.length(); i++)
 			{
 				if (lineToReturn[i] == ' ' && tmp.size() == 0)
 				{
