@@ -137,7 +137,7 @@ namespace MQTT_Client_NS
 		bool publish(const char*, const MQTT_Data_t&);
 
 
-		MQTT_Client::MQTT_Client(const address_t&, const clientID_t&);
+		MQTT_Client(const address_t&, const clientID_t&);
 		MQTT_Client();
 		~MQTT_Client();
     private:

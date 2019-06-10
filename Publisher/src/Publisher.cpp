@@ -15,7 +15,8 @@ using namespace MQTT_Client_NS;
 using namespace DataStore_NS;
 using namespace std;
 
-
+//TO DO: implementacja publishera wg:
+//https://github.com/eclipse/paho.mqtt.c/blob/master/src/samples/MQTTClient_publish_async.c
 int main()
 {
 	PublisherCallbacks callbacks;

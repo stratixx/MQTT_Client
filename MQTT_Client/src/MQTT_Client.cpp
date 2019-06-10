@@ -115,7 +115,7 @@ namespace MQTT_Client_NS
 	{
 		int rc;
 
-		MQTTClient_setCallbacks(libraryClient, (void*)context, connlost, msgarrvd, delivered);
+		MQTTClient_setCallbacks(libraryClient, &context, connlost, msgarrvd, delivered);
 		MQTT_Client::clients[context] = this;
 
 		if ((rc = MQTTClient_connect(libraryClient, &connectOptions)) != MQTTCLIENT_SUCCESS)
@@ -183,7 +183,7 @@ namespace MQTT_Client_NS
 		connectOptions.cleansession = 1;
 
 		context = getNewContext();
-		MQTTClient_setCallbacks(libraryClient, (void*)context, connlost, msgarrvd, delivered);
+		MQTTClient_setCallbacks(libraryClient, &context, connlost, msgarrvd, delivered);
 
 		MQTT_Client::clients[context] = this;
 	}
@@ -214,7 +214,7 @@ namespace MQTT_Client_NS
 
 	void MQTT_Client::delivered(void *context, MQTTClient_deliveryToken dt)
 	{
-		int context_ = (int)context;
+		MQTT_Client::MQTTClientContext_t context_ = *(MQTT_Client::MQTTClientContext_t*)context;
 
 		MQTT_Client::clients_t::iterator iter =  MQTT_Client::clients.find(context_);
 
@@ -230,7 +230,7 @@ namespace MQTT_Client_NS
 
 	int MQTT_Client::msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message)
 	{
-		int context_ = (int)context;
+		MQTT_Client::MQTTClientContext_t context_ = *(MQTT_Client::MQTTClientContext_t*)context;
 
 		clients_t::iterator iter = MQTT_Client::clients.find(context_);
 
@@ -245,7 +245,8 @@ namespace MQTT_Client_NS
 			char * payloadPtr = (char*)message->payload;
 
 			//data.dataType = MQTT_Data_t::data_t::STRING;
-			data.topic.assign(topicName, topicLen);
+			//data.topic.assign(topicName, topicLen);
+			data.topic = topicName;
 			data.dataVector.reserve(message->payloadlen);
 			data.dataVector.insert(data.dataVector.end(), &(payloadPtr[0]), &(payloadPtr[message->payloadlen]));
 
@@ -256,7 +257,7 @@ namespace MQTT_Client_NS
 
 	void MQTT_Client::connlost(void *context, char *cause)
 	{
-		MQTT_Client::MQTTClientContext_t context_ = (MQTT_Client::MQTTClientContext_t)context;
+		MQTT_Client::MQTTClientContext_t context_ = *(MQTT_Client::MQTTClientContext_t*)context;
 
 		MQTT_Client::clients_t::iterator iter = MQTT_Client::clients.find(context_);
 
@@ -266,7 +267,8 @@ namespace MQTT_Client_NS
 		}
 		else
 		{
-			iter->second->callback->callbackConnectionLost(std::string(cause));
+			std::string causeStr = cause;
+			iter->second->callback->callbackConnectionLost(causeStr);
 		}
 		
 	}
