@@ -96,6 +96,7 @@ string DataJSON::readJSONFromFile(string fileName)
 
 void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t messageFromBroker)
 {
+	string writingPath;
 	string currentPath = this->getCurrentWorkingDirectory();
 	std::size_t pos = currentPath.find("build");
 	currentPath = currentPath.substr(0, pos);
@@ -106,9 +107,10 @@ void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t messageFromBroker)
 	// tu zmienic na zmienna topic z MQTT Data 
 	string goOtrzymuje = "/merakimv/Q2HV-6YJL-JGJ4/raw_detections"; //topic
 	std::string s = "/merakimv/Q2HV-6YJL-JGJ4/raw_detections";
-	std::replace(s.begin(), s.end(), '/', '\\'); // replace all 'x' to 'y'
+	std::replace(s.begin(), s.end(), '/', '\\'); 
 	cout << endl;
-	s = currentPath + s;
+	writingPath = currentPath + s;
+
 	cout << "CCCCCCCCCCCCC: " << s << endl;
 	int check;
 	const char *c = s.c_str();
