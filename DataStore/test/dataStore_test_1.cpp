@@ -20,7 +20,7 @@ BOOST_AUTO_TEST_CASE( test_1 )
 	currentPath = currentPath.substr(pos);
 	string rightPath = string("build/DataStore");
     #ifdef _WIN32
-        std::replace( rightPath.begin(), rightPath.end(), '/', filePathSeparator)
+	std::replace(rightPath.begin(), rightPath.end(), '/', filePathSeparator);
     #endif
 
 	BOOST_TEST(currentPath==rightPath);

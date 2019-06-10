@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_CASE( test_2 )
 
     string pathJSON = "../../DataStore/src/exampleJSON.json";
     #ifdef _WIN32
-        std::replace( pathJSON.begin(), pathJSON.end(), '/', filePathSeparator)
+	std::replace(pathJSON.begin(), pathJSON.end(), '/', filePathSeparator);
     #endif
 
     cout<<"TestModule2 test_2 "<<endl;

@@ -80,7 +80,7 @@ string DataJSON::readJSONFromFile(string fileName)
 		while (getline(in, lineToReturn))
 		{
 			std::string tmp; // strip whitespaces from the beginning
-			for (int i = 0; i < lineToReturn.length(); i++)
+			for ( unsigned int i = 0; i < lineToReturn.length(); i++)
 			{
 				if (lineToReturn[i] == ' ' && tmp.size() == 0)
 				{
@@ -128,7 +128,7 @@ void DataJSON::writeJSONToFile(string fileName, MQTT_Data_t &messageFromBroker)
 	cout << "fileJSONPath: " << fileJSONPath <<std::endl;
 	
     #ifdef _WIN32
-        std::replace( s.begin(), s.end(), '/', filePathSeparator)
+	std::replace(s.begin(), s.end(), '/', filePathSeparator);
     #endif
 	cout << endl;
 	
